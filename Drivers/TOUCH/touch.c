@@ -188,8 +188,12 @@ u8 TP_Scan(u8 tp)
 		if(tp)TP_Read_XY2(&tp_dev.x[0],&tp_dev.y[0]);//读取物理坐标
 		else if(TP_Read_XY2(&tp_dev.x[0],&tp_dev.y[0]))//读取屏幕坐标
 		{
-	 		tp_dev.x[0]=tp_dev.xfac*tp_dev.x[0]+tp_dev.xoff;//将结果转换为屏幕坐标
-			tp_dev.y[0]=tp_dev.yfac*tp_dev.y[0]+tp_dev.yoff;  
+	 		// tp_dev.x[0]=tp_dev.xfac*tp_dev.x[0]+tp_dev.xoff;//将结果转换为屏幕坐标
+			// tp_dev.y[0]=tp_dev.yfac*tp_dev.y[0]+tp_dev.yoff;  
+			int tmp_x=tp_dev.xfac*tp_dev.x[0]+tp_dev.xoff;//将结果转换为屏幕坐标
+			int tmp_y=tp_dev.yfac*tp_dev.y[0]+tp_dev.yoff; 
+			tp_dev.x[0]=322-tmp_y;
+			tp_dev.y[0]=tmp_x;
 	 	} 
 		if((tp_dev.sta&TP_PRES_DOWN)==0)//之前没有被按下
 		{		 

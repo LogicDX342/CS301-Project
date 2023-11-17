@@ -18,6 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "fatfs.h"
+#include "sdio.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -27,9 +29,11 @@
 #include "lcd.h"
 #include "touch.h"
 #include "24cxx.h"
-#include "lvgl.h"
-#include "port/lv_port_disp.h"
-#include "port/lv_port_indev.h"
+#include "lv_conf.h"
+#include "lv_port_disp.h"
+#include "lv_port_indev.h"
+#include "gui_guider.h"
+
 #include <stdio.h>
 /* USER CODE END Includes */
 
@@ -62,32 +66,8 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-static void btn_event_cb(lv_obj_t * btn, lv_event_t event)
-{
-  if(event == LV_EVENT_CLICKED)
-  {
-    static uint8_t cnt = 0;
-    cnt++;
 
-    lv_obj_t *label = lv_obj_get_child(btn, NULL);
-    char buf[32];
-    sprintf(buf, "Button: %d", cnt);
-    lv_label_set_text(label, buf);
-  }
-}
-
-void lv_example_get_started_1(void)
-{
-  lv_obj_t * btn = lv_btn_create(lv_scr_act(), NULL);
-  lv_obj_set_pos(btn, 10,10);
-  lv_obj_set_size(btn, 120,50);
-  lv_obj_set_event_cb(btn, btn_event_cb);
-
-  lv_obj_t *label = lv_label_create(btn, NULL);
-  lv_label_set_text(label, "Button");
-  lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, 0);
-}
-
+lv_ui guider_ui;
 /* USER CODE END 0 */
 
 /**
@@ -120,16 +100,16 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   MX_TIM6_Init();
+  MX_SDIO_SD_Init();
+  MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT(&htim6);
+  // lv_init();
+  // lv_port_disp_init();
+  // lv_port_indev_init();
+
+  // setup_ui(&guider_ui);
+
   LCD_Init();
-
-  LCD_Clear(WHITE);
-  lv_init();
-  lv_port_disp_init();
-  lv_port_indev_init();
-
-  lv_example_get_started_1();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -139,9 +119,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    lv_tick_inc(1);
-    HAL_Delay(1);
-    lv_task_handler();
+    // show the location of the touch point
+    // lv_task_handler();
+    HAL_Delay(30);
   }
   /* USER CODE END 3 */
 }

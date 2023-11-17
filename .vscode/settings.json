@@ -3,6 +3,7 @@
         "*.S": "arm",
         "touch.h": "c",
         "lv_port_disp.h": "c",
-        "lv_port_indev.h": "c"
+        "lv_port_indev.h": "c",
+        "MMC_SD.C": "cpp"
     }
 }

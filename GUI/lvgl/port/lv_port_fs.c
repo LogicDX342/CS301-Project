@@ -92,7 +92,7 @@ void lv_port_fs_init(void)
 static void fs_init(void)
 {
     /*E.g. for FatFS initialize the SD card and FatFS itself*/
-
+    
     /*You code here*/
 }
 

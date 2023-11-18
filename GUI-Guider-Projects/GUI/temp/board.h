@@ -17,16 +17,13 @@
  *====================*/
 
 /*Maximal horizontal resolution*/
-#define LV_HOR_RES_MAX (320)
+#define LV_HOR_RES_MAX (480)
 
 /*Maximal vertical resolution*/
-#define LV_VER_RES_MAX (240)
+#define LV_VER_RES_MAX (272)
 
 /*Color depth: 1 (1 byte per pixel), 8 (RGB332), 16 (RGB565), 32 (ARGB8888)*/
 #define LV_COLOR_DEPTH 16
-
-/*Swap the 2 bytes of RGB565 color. Useful if the display has an 8-bit interface (e.g. SPI)*/
-#define LV_COLOR_16_SWAP 0
 
 /*Enable features to draw on transparent background.
  *It's required if opa, and transform_* style properties are used.
@@ -48,15 +45,8 @@
 #define LV_MEM_CUSTOM 0
 #if LV_MEM_CUSTOM == 0
 /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
-#define LV_MEM_SIZE (48U * 1024U)
-#else     /* LV_MEM_CUSTOM */
-/*Header for the dynamic memory function*/
-#define LV_MEM_CUSTOM_INCLUDE <stdlib.h>
-/*Name for the memory malloc function*/
-#define LV_MEM_CUSTOM_ALLOC malloc
-/*Name for the memory free function*/
-#define LV_MEM_CUSTOM_FREE free
-/*Name for the memory realloc function*/
+#define LV_MEM_SIZE (24U * 1024U)
+#else     /* LV_MEM_CUSTOM *//*Name for the memory realloc function*/
 #define LV_MEM_CUSTOM_REALLOC realloc
 #endif    /* LV_MEM_CUSTOM */
 
@@ -288,6 +278,13 @@
 /*Define a custom attribute to `lv_disp_flush_ready` function*/
 #define LV_ATTRIBUTE_FLUSH_READY 
 
+/*Required alignment size for buffers*/
+#define LV_ATTRIBUTE_MEM_ALIGN_SIZE 1
+
+/*Will be added where memories needs to be aligned (with -Os data might not be aligned to boundary by default).
+ * E.g. __attribute__((aligned(4)))*/
+#define LV_ATTRIBUTE_MEM_ALIGN 
+
 #ifndef LV_ATTRIBUTE_LARGE_CONST
 /*Attribute to mark large constant arrays for example font's bitmaps*/
 #define LV_ATTRIBUTE_LARGE_CONST 
@@ -428,7 +425,7 @@
  *================*/
 
 /*Documentation of the widgets: https://docs.lvgl.io/latest/en/html/widgets/index.html*/
-#define LV_USE_ARC 0
+#define LV_USE_ARC 1
 
 #define LV_USE_BAR 0
 
@@ -526,7 +523,7 @@
 
 #define LV_USE_SPINBOX 0
 
-#define LV_USE_SPINNER 0
+#define LV_USE_SPINNER 1
 
 #define LV_USE_TABVIEW 0
 
@@ -612,7 +609,7 @@
 #endif    /* LV_USE_FS_WIN32 */
 
 /*API for FATFS (needs to be added separately). Uses f_open, f_read, etc*/
-#define LV_USE_FS_FATFS 0
+#define LV_USE_FS_FATFS 1
 #if LV_USE_FS_FATFS
 /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
 #define LV_FS_FATFS_LETTER 'S'
@@ -634,14 +631,14 @@
 #endif    /* LV_USE_FS_RAWFS */
 
 /*PNG decoder library*/
-#define LV_USE_PNG 0
+#define LV_USE_PNG 1
 
 /*BMP decoder library*/
-#define LV_USE_BMP 0
+#define LV_USE_BMP 1
 
 /* JPG + split JPG decoder library.
  * Split JPG is a custom format optimized for embedded systems. */
-#define LV_USE_SJPG 0
+#define LV_USE_SJPG 1
 
 /*GIF decoder library*/
 #define LV_USE_GIF 0

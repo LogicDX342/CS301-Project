@@ -30,15 +30,12 @@ typedef struct
 	lv_obj_t *Homepage_btn_4_label;
 	lv_obj_t *Album;
 	bool Album_del;
-	lv_obj_t *Album_list_1;
-	lv_obj_t *Album_list_1_item0;
-	lv_obj_t *Album_list_1_item1;
-	lv_obj_t *Album_list_1_item2;
-	lv_obj_t *Album_list_1_item3;
-	lv_obj_t *Album_list_1_item4;
-	lv_obj_t *Album_list_1_item5;
-	lv_obj_t *Album_list_1_item6;
-	lv_obj_t *Album_list_1_item7;
+	lv_obj_t *Album_file_list;
+	lv_obj_t *Album_file_list_item0;
+	lv_obj_t *Album_btn_1;
+	lv_obj_t *Album_btn_1_label;
+	lv_obj_t *Album_img_1;
+	lv_obj_t *Album_spinner_1;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);

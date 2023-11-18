@@ -52,8 +52,8 @@ typedef uint8_t lv_fs_res_t;
  * File open mode.
  */
 enum {
-    LV_FS_MODE_WR = 0x01,
-    LV_FS_MODE_RD = 0x02,
+    LV_FS_MODE_RD = 0x01,
+    LV_FS_MODE_WR = 0x02,
 };
 typedef uint8_t lv_fs_mode_t;
 

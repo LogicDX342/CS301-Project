@@ -16,10 +16,10 @@
  *====================*/
 
 /*Maximal horizontal resolution*/
-#define LV_HOR_RES_MAX (320)
+#define LV_HOR_RES_MAX (480)
 
 /*Maximal vertical resolution*/
-#define LV_VER_RES_MAX (240)
+#define LV_VER_RES_MAX (272)
 
 /*Color depth: 1 (1 byte per pixel), 8 (RGB332), 16 (RGB565), 32 (ARGB8888)*/
 #define LV_COLOR_DEPTH 16
@@ -47,7 +47,7 @@
 #define LV_MEM_CUSTOM 0
 #if LV_MEM_CUSTOM == 0
 /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
-#define LV_MEM_SIZE (48U * 1024U)
+#define LV_MEM_SIZE (24U * 1024U)
 #else     /* LV_MEM_CUSTOM */
 /*Header for the dynamic memory function*/
 #define LV_MEM_CUSTOM_INCLUDE <stdlib.h>
@@ -286,6 +286,13 @@
 
 /*Define a custom attribute to `lv_disp_flush_ready` function*/
 #define LV_ATTRIBUTE_FLUSH_READY 
+
+/*Required alignment size for buffers*/
+#define LV_ATTRIBUTE_MEM_ALIGN_SIZE 1
+
+/*Will be added where memories needs to be aligned (with -Os data might not be aligned to boundary by default).
+ * E.g. __attribute__((aligned(4)))*/
+#define LV_ATTRIBUTE_MEM_ALIGN 
 
 #ifndef LV_ATTRIBUTE_LARGE_CONST
 /*Attribute to mark large constant arrays for example font's bitmaps*/
@@ -578,7 +585,7 @@
 /*File system interfaces for common APIs */
 
 /*API for fopen, fread, etc*/
-#define LV_USE_FS_STDIO 0
+#define LV_USE_FS_STDIO 1
 #if LV_USE_FS_STDIO
 /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
 #define LV_FS_STDIO_LETTER 'I'
@@ -633,14 +640,14 @@
 #endif    /* LV_USE_FS_RAWFS */
 
 /*PNG decoder library*/
-#define LV_USE_PNG 0
+#define LV_USE_PNG 1
 
 /*BMP decoder library*/
-#define LV_USE_BMP 0
+#define LV_USE_BMP 1
 
 /* JPG + split JPG decoder library.
  * Split JPG is a custom format optimized for embedded systems. */
-#define LV_USE_SJPG 0
+#define LV_USE_SJPG 1
 
 /*GIF decoder library*/
 #define LV_USE_GIF 0

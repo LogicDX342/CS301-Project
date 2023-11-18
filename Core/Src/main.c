@@ -68,45 +68,40 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-// FRESULT f_res;                     
-// UINT bw;
-// BYTE ReadBuffer[1024]={0};       
-// BYTE WriteBuffer[]= "STM32CubeMX SDcard FATFS Test\r\n";
- 
-// void mount_disk(void)
-// {
-//    f_res = f_mount(&USERFatFS, USERPath, 0);
-// }
- 
-// void create_file(void)
-// {
-//     printf("write data is : %s\r\n",WriteBuffer);
-//     f_res = f_open(&USERFile, "test.txt", FA_OPEN_ALWAYS | FA_WRITE);
-//     f_res = f_write(&USERFile, WriteBuffer, sizeof(WriteBuffer), &bw);
-//     f_res = f_close(&USERFile);
-// }
- 
-// void read_file(void)
-// {
-//     f_res = f_open(&USERFile, "test.txt", FA_READ);
-//     f_res = f_read(&USERFile, ReadBuffer, sizeof(WriteBuffer), &bw);
-//     printf("read data is : %s\r\n",ReadBuffer);
-//     f_res = f_close(&USERFile);
-// }
- 
-// void umount_disk(void)
-// {
-//    f_res = f_mount(NULL, USERPath, 0);
-// }
- 
-// void FatfsTest(void)
-// {
-//     mount_disk(); //挂载SD卡
-//     create_file();//创建TXT文件 
-//     read_file();  //读取文件内容并放到ReadBuffer中
-//     umount_disk();//卸载SD卡
-// }
-// lv_ui guider_ui;
+void lv_example_bmp_1(void)
+{
+  lv_obj_t *img = lv_img_create(lv_scr_act());
+  /* Assuming a File system is attached to letter 'A'
+   * E.g. set LV_USE_FS_STDIO 'A' in lv_conf.h */
+#if LV_COLOR_DEPTH == 32
+  lv_img_set_src(img, "A:lvgl/examples/libs/bmp/example_32bit.bmp");
+#elif LV_COLOR_DEPTH == 16
+  lv_img_set_src(img, "S:example_16bit.bmp");
+#endif
+  lv_obj_center(img);
+}
+
+void lv_example_fs_1(void)
+{
+  lv_fs_file_t file;
+  lv_fs_res_t res;
+  res = lv_fs_open(&file, "S:test.txt", LV_FS_MODE_RD | LV_FS_MODE_WR);
+  if (res == LV_FS_RES_OK)
+  {
+    char buf[256];
+    lv_fs_write(&file, "aacc text bbb", 14, NULL);
+    lv_fs_read(&file, buf, sizeof(buf), NULL);
+    lv_fs_close(&file);
+    printf("Read file: %s\n", buf);
+  }
+  else
+  {
+    printf("Could not read file\n");
+    printf("Error code: %d\n", res);
+  }
+}
+
+lv_ui guider_ui;
 
 /* USER CODE END 0 */
 
@@ -143,15 +138,18 @@ int main(void)
   MX_SPI1_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
-  // lv_init();
-  // lv_port_disp_init();
-  // lv_port_indev_init();
+  f_mount(&USERFatFS, USERPath, 0);
+  printf("USERPath: %s\r\n", USERPath);
+  // HAL_TIM_Base_Start_IT(&htim6);
+  lv_init();
+  lv_port_disp_init();
+  lv_port_indev_init();
 
   // setup_ui(&guider_ui);
-
-  printf("\r\n ****** SDcard FatFs Example ******\r\n\r\n");
-  HAL_Delay (500);
   // FatfsTest();
+  // printf("USERPath: %s\r\n", USERPath);
+  lv_example_fs_1();
+  lv_example_bmp_1();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -161,8 +159,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    // show the location of the touch point
-    // lv_task_handler();
+    lv_task_handler();
     HAL_Delay(30);
   }
   /* USER CODE END 3 */

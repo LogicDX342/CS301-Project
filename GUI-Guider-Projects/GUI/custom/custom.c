@@ -39,4 +39,7 @@ void custom_init(lv_ui *ui)
 {
     /* Add your codes here */
 }
+void show_image(char* path){
+  
+}
 

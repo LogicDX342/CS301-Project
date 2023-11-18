@@ -28,10 +28,14 @@ typedef struct
 	lv_obj_t *Homepage_btn_3_label;
 	lv_obj_t *Homepage_btn_4;
 	lv_obj_t *Homepage_btn_4_label;
+	lv_obj_t *Homepage_username_label;
+	lv_obj_t *Homepage_digital_clock;
 	lv_obj_t *Album;
 	bool Album_del;
-	lv_obj_t *Album_list_1;
-	lv_obj_t *Album_list_1_item0;
+	lv_obj_t *Album_return_btn;
+	lv_obj_t *Album_return_btn_label;
+	lv_obj_t *Album_image;
+	lv_obj_t *Album_file_list;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);
@@ -41,6 +45,7 @@ extern lv_ui guider_ui;
 
 void setup_scr_Homepage(lv_ui *ui);
 void setup_scr_Album(lv_ui *ui);
+LV_IMG_DECLARE(__135x148);
 
 LV_FONT_DECLARE(lv_font_montserratMedium_14)
 LV_FONT_DECLARE(lv_font_montserratMedium_16)

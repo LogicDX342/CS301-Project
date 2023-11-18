@@ -76,3 +76,16 @@ void clock_count(int *hour, int *min, int *sec)
 #endif
 
 
+extern int Homepage_digital_clock_hour_value;
+extern int Homepage_digital_clock_min_value;
+extern int Homepage_digital_clock_sec_value;
+
+void Homepage_digital_clock_timer(lv_timer_t *timer)
+{
+    clock_count_24(&Homepage_digital_clock_hour_value, &Homepage_digital_clock_min_value, &Homepage_digital_clock_sec_value);
+    if (lv_obj_is_valid(guider_ui.Homepage_digital_clock))
+    {
+        lv_dclock_set_text_fmt(guider_ui.Homepage_digital_clock, "%d:%02d:%02d", Homepage_digital_clock_hour_value, Homepage_digital_clock_min_value, Homepage_digital_clock_sec_value);
+    }
+}
+

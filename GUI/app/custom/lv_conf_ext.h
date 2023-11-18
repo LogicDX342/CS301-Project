@@ -7,25 +7,36 @@
 * terms, then you may not retain, install, activate or otherwise use the software.
 */
 
-#ifndef WIDGET_INIT_H
-#define WIDGET_INIT_H
-#ifdef __cplusplus
-extern "C" {
+/*
+ * lv_conf_ext.h for custom lvconf file.
+ * Created on: Feb 8, 2023
+ * example :
+ *	#undef LV_FONT_FMT_TXT_LARGE
+ *  #define LV_FONT_FMT_TXT_LARGE 1
+ */
+
+#ifndef LV_CONF_EXT_H
+#define LV_CONF_EXT_H
+
+
+/* common code  begin  */
+
+
+/* common code end */
+
+
+#if LV_USE_GUIDER_SIMULATOR
+/* code for simulator begin  */
+
+
+/* code for simulator end */
+#else
+/* code for board begin */
+
+
+/* code for board end */	
 #endif
 
-#include "lvgl.h"
-#include "gui_guider.h"
-
-__attribute__((unused)) void kb_event_cb(lv_event_t *e);
-__attribute__((unused)) void ta_event_cb(lv_event_t *e);
-#if LV_USE_ANALOGCLOCK != 0
-void clock_count(int *hour, int *min, int *sec);
-#endif
 
 
-void Homepage_digital_clock_timer(lv_timer_t *timer);
-
-#ifdef __cplusplus
-}
-#endif
-#endif
+#endif  /* LV_CONF_EXT_H */	

@@ -7,24 +7,29 @@
 * terms, then you may not retain, install, activate or otherwise use the software.
 */
 
-#ifndef WIDGET_INIT_H
-#define WIDGET_INIT_H
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include "lvgl.h"
+#include <stdio.h>
 #include "gui_guider.h"
 
-__attribute__((unused)) void kb_event_cb(lv_event_t *e);
-__attribute__((unused)) void ta_event_cb(lv_event_t *e);
-#if LV_USE_ANALOGCLOCK != 0
-void clock_count(int *hour, int *min, int *sec);
-#endif
 
-
-
-#ifdef __cplusplus
+void ui_init_style(lv_style_t * style)
+{
+  if (style->prop_cnt > 1)
+    lv_style_reset(style);
+  else
+    lv_style_init(style);
 }
-#endif
-#endif
+
+void init_scr_del_flag(lv_ui *ui)
+{
+  
+	ui->Homepage_del = true;
+	ui->Album_del = true;
+}
+
+void setup_ui(lv_ui *ui)
+{
+  init_scr_del_flag(ui);
+  setup_scr_Album(ui);
+  lv_scr_load(ui->Album);
+}

@@ -41,44 +41,56 @@ void events_init_Homepage(lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->Homepage_btn_1, Homepage_btn_1_event_handler, LV_EVENT_ALL, NULL);
 }
-static void Album_file_list_item0_event_handler (lv_event_t *e)
+static void Album_event_handler (lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+
+	switch (code) {
+	case LV_EVENT_SCREEN_LOADED:
+	{
+		get_file_list();
+		break;
+	}
+	case LV_EVENT_GESTURE:
+	{
+		lv_dir_t dir = lv_indev_get_gesture_dir(lv_indev_get_act());
+		switch(dir) {
+			case LV_DIR_TOP:
+			{
+				lv_indev_wait_release(lv_indev_get_act());
+				set_next_image();
+				break;
+			}
+			case LV_DIR_BOTTOM:
+			{
+				lv_indev_wait_release(lv_indev_get_act());
+				set_prev_image();
+				break;
+			}
+		}
+		break;
+	}
+	default:
+		break;
+	}
+}
+static void Album_return_btn_event_handler (lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
 
 	switch (code) {
 	case LV_EVENT_CLICKED:
 	{
-		show_image(char*);
-		show_image(char*);
-		//Write animation: Album_img_1 move_x
-	  	lv_anim_t Album_img_1_anim_move_x;
-	  	lv_anim_init(&Album_img_1_anim_move_x);
-	  	lv_anim_set_var(&Album_img_1_anim_move_x, guider_ui.Album_img_1);
-	  	lv_anim_set_time(&Album_img_1_anim_move_x, 1000);
-	  	lv_anim_set_delay(&Album_img_1_anim_move_x, 0);
-	  	lv_anim_set_exec_cb(&Album_img_1_anim_move_x, (lv_anim_exec_xcb_t)lv_obj_set_x);
-		lv_anim_set_values(&Album_img_1_anim_move_x, lv_obj_get_x(guider_ui.Album_img_1), 0);
-	  	lv_anim_set_path_cb(&Album_img_1_anim_move_x, &lv_anim_path_linear);
-	  	lv_anim_set_repeat_count(&Album_img_1_anim_move_x, 0);
-	  	lv_anim_set_repeat_delay(&Album_img_1_anim_move_x, 0);
-	  	lv_anim_set_playback_time(&Album_img_1_anim_move_x, 0);
-	  	lv_anim_set_playback_delay(&Album_img_1_anim_move_x, 0);
-		lv_anim_start(&Album_img_1_anim_move_x);
-		//Write animation: Album_img_1 move_y
-	  	lv_anim_t Album_img_1_anim_move_y;
-	  	lv_anim_init(&Album_img_1_anim_move_y);
-	  	lv_anim_set_var(&Album_img_1_anim_move_y, guider_ui.Album_img_1);
-	  	lv_anim_set_time(&Album_img_1_anim_move_y, 1000);
-	  	lv_anim_set_delay(&Album_img_1_anim_move_y, 0);
-	  	lv_anim_set_exec_cb(&Album_img_1_anim_move_y, (lv_anim_exec_xcb_t)lv_obj_set_y);
-		lv_anim_set_values(&Album_img_1_anim_move_y, lv_obj_get_y(guider_ui.Album_img_1), 0);
-	  	lv_anim_set_path_cb(&Album_img_1_anim_move_y, &lv_anim_path_linear);
-	  	lv_anim_set_repeat_count(&Album_img_1_anim_move_y, 0);
-	  	lv_anim_set_repeat_delay(&Album_img_1_anim_move_y, 0);
-	  	lv_anim_set_playback_time(&Album_img_1_anim_move_y, 0);
-	  	lv_anim_set_playback_delay(&Album_img_1_anim_move_y, 0);
-		lv_anim_start(&Album_img_1_anim_move_y);
-		lv_obj_clear_flag(guider_ui.Album_spinner_1, LV_OBJ_FLAG_HIDDEN);
+		//Write the load screen code.
+	    lv_obj_t * act_scr = lv_scr_act();
+	    lv_disp_t * d = lv_obj_get_disp(act_scr);
+	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
+	        if (guider_ui.Homepage_del == true) {
+	          setup_scr_Homepage(&guider_ui);
+	        }
+	        lv_scr_load_anim(guider_ui.Homepage, LV_SCR_LOAD_ANIM_NONE, 200, 200, true);
+	        guider_ui.Album_del = true;
+	    }
 		break;
 	}
 	default:
@@ -87,7 +99,8 @@ static void Album_file_list_item0_event_handler (lv_event_t *e)
 }
 void events_init_Album(lv_ui *ui)
 {
-	lv_obj_add_event_cb(ui->Album_file_list_item0, Album_file_list_item0_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->Album, Album_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->Album_return_btn, Album_return_btn_event_handler, LV_EVENT_ALL, NULL);
 }
 
 void events_init(lv_ui *ui)

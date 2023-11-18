@@ -68,41 +68,9 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void lv_example_bmp_1(void)
-{
-  lv_obj_t *img = lv_img_create(lv_scr_act());
-  /* Assuming a File system is attached to letter 'A'
-   * E.g. set LV_USE_FS_STDIO 'A' in lv_conf.h */
-#if LV_COLOR_DEPTH == 32
-  lv_img_set_src(img, "A:lvgl/examples/libs/bmp/example_32bit.bmp");
-#elif LV_COLOR_DEPTH == 16
-  lv_img_set_src(img, "S:example_16bit.bmp");
-#endif
-  lv_obj_center(img);
-}
 
-void lv_example_fs_1(void)
-{
-  lv_fs_file_t file;
-  lv_fs_res_t res;
-  res = lv_fs_open(&file, "S:test.txt", LV_FS_MODE_RD | LV_FS_MODE_WR);
-  if (res == LV_FS_RES_OK)
-  {
-    char buf[256];
-    lv_fs_write(&file, "aacc text bbb", 14, NULL);
-    lv_fs_read(&file, buf, sizeof(buf), NULL);
-    lv_fs_close(&file);
-    printf("Read file: %s\n", buf);
-  }
-  else
-  {
-    printf("Could not read file\n");
-    printf("Error code: %d\n", res);
-  }
-}
 
 lv_ui guider_ui;
-
 /* USER CODE END 0 */
 
 /**
@@ -138,18 +106,17 @@ int main(void)
   MX_SPI1_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim6);
   f_mount(&USERFatFS, USERPath, 0);
   printf("USERPath: %s\r\n", USERPath);
   // HAL_TIM_Base_Start_IT(&htim6);
   lv_init();
   lv_port_disp_init();
   lv_port_indev_init();
-
-  // setup_ui(&guider_ui);
-  // FatfsTest();
-  // printf("USERPath: %s\r\n", USERPath);
-  lv_example_fs_1();
-  lv_example_bmp_1();
+  // create_button_and_image();
+  // create_file_list();
+  setup_ui(&guider_ui);
+  //  lv_obj_add_event_cb(lv_scr_act(), scr_event_cb, LV_EVENT_GESTURE, NULL);
   /* USER CODE END 2 */
 
   /* Infinite loop */

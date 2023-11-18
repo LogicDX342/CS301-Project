@@ -23,7 +23,7 @@
 #define LV_VER_RES_MAX (272)
 
 /*Color depth: 1 (1 byte per pixel), 8 (RGB332), 16 (RGB565), 32 (ARGB8888)*/
-#define LV_COLOR_DEPTH 16
+#define LV_COLOR_DEPTH 8
 
 /*Enable features to draw on transparent background.
  *It's required if opa, and transform_* style properties are used.
@@ -425,7 +425,7 @@
  *================*/
 
 /*Documentation of the widgets: https://docs.lvgl.io/latest/en/html/widgets/index.html*/
-#define LV_USE_ARC 1
+#define LV_USE_ARC 0
 
 #define LV_USE_BAR 0
 
@@ -497,7 +497,7 @@
 
 #define LV_USE_COLORWHEEL 0
 
-#define LV_USE_DCLOCK 0
+#define LV_USE_DCLOCK 1
 
 #define LV_USE_IMGBTN 0
 
@@ -523,7 +523,7 @@
 
 #define LV_USE_SPINBOX 0
 
-#define LV_USE_SPINNER 1
+#define LV_USE_SPINNER 0
 
 #define LV_USE_TABVIEW 0
 
@@ -609,7 +609,7 @@
 #endif    /* LV_USE_FS_WIN32 */
 
 /*API for FATFS (needs to be added separately). Uses f_open, f_read, etc*/
-#define LV_USE_FS_FATFS 1
+#define LV_USE_FS_FATFS 0
 #if LV_USE_FS_FATFS
 /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
 #define LV_FS_FATFS_LETTER 'S'
@@ -631,14 +631,14 @@
 #endif    /* LV_USE_FS_RAWFS */
 
 /*PNG decoder library*/
-#define LV_USE_PNG 1
+#define LV_USE_PNG 0
 
 /*BMP decoder library*/
-#define LV_USE_BMP 1
+#define LV_USE_BMP 0
 
 /* JPG + split JPG decoder library.
  * Split JPG is a custom format optimized for embedded systems. */
-#define LV_USE_SJPG 1
+#define LV_USE_SJPG 0
 
 /*GIF decoder library*/
 #define LV_USE_GIF 0

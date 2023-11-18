@@ -113,7 +113,7 @@ int Homepage_digital_clock_sec_value = 50;void setup_scr_Homepage(lv_ui *ui)
 	lv_label_set_text(ui->Homepage_username_label, "Username");
 	lv_label_set_long_mode(ui->Homepage_username_label, LV_LABEL_LONG_WRAP);
 	lv_obj_set_pos(ui->Homepage_username_label, 5, 215);
-	lv_obj_set_size(ui->Homepage_username_label, 100, 15);
+	lv_obj_set_size(ui->Homepage_username_label, 100, 20);
 
 	//Write style for Homepage_username_label, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_border_width(ui->Homepage_username_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -138,7 +138,7 @@ int Homepage_digital_clock_sec_value = 50;void setup_scr_Homepage(lv_ui *ui)
 		Homepage_digital_clock_timer_enabled = true;
 	}
 	lv_obj_set_pos(ui->Homepage_digital_clock, 235, 210);
-	lv_obj_set_size(ui->Homepage_digital_clock, 80, 15);
+	lv_obj_set_size(ui->Homepage_digital_clock, 80, 20);
 
 	//Write style for Homepage_digital_clock, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
 	lv_obj_set_style_radius(ui->Homepage_digital_clock, 0, LV_PART_MAIN|LV_STATE_DEFAULT);

@@ -36,6 +36,7 @@ typedef struct
 	lv_obj_t *Album_return_btn_label;
 	lv_obj_t *Album_image;
 	lv_obj_t *Album_file_list;
+	lv_obj_t *Album_count_label;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);

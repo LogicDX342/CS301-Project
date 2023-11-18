@@ -85,6 +85,7 @@ static void Album_return_btn_event_handler (lv_event_t *e)
 	    lv_obj_t * act_scr = lv_scr_act();
 	    lv_disp_t * d = lv_obj_get_disp(act_scr);
 	    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
+			lv_obj_clean(act_scr);
 	        if (guider_ui.Homepage_del == true) {
 	          setup_scr_Homepage(&guider_ui);
 	        }

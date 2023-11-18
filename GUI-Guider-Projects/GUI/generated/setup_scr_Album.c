@@ -49,7 +49,7 @@ void setup_scr_Album(lv_ui *ui)
 	lv_obj_add_flag(ui->Album_image, LV_OBJ_FLAG_CLICKABLE);
 	lv_img_set_pivot(ui->Album_image, 50,50);
 	lv_img_set_angle(ui->Album_image, 0);
-	lv_obj_set_pos(ui->Album_image, 171, 66);
+	lv_obj_set_pos(ui->Album_image, 171, 52);
 	lv_obj_set_size(ui->Album_image, 135, 148);
 
 	//Write style for Album_image, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -117,6 +117,28 @@ void setup_scr_Album(lv_ui *ui)
 	lv_style_set_radius(&style_Album_file_list_extra_texts_main_default, 3);
 	lv_style_set_bg_opa(&style_Album_file_list_extra_texts_main_default, 255);
 	lv_style_set_bg_color(&style_Album_file_list_extra_texts_main_default, lv_color_hex(0xffffff));
+
+	//Write codes Album_count_label
+	ui->Album_count_label = lv_label_create(ui->Album);
+	lv_label_set_text(ui->Album_count_label, "0/0");
+	lv_label_set_long_mode(ui->Album_count_label, LV_LABEL_LONG_WRAP);
+	lv_obj_set_pos(ui->Album_count_label, 190, 210);
+	lv_obj_set_size(ui->Album_count_label, 100, 18);
+
+	//Write style for Album_count_label, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_border_width(ui->Album_count_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->Album_count_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_color(ui->Album_count_label, lv_color_hex(0x000000), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->Album_count_label, &lv_font_montserratMedium_14, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_letter_space(ui->Album_count_label, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_line_space(ui->Album_count_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->Album_count_label, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->Album_count_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->Album_count_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->Album_count_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->Album_count_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->Album_count_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->Album_count_label, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
 	//Update current screen layout.
 	lv_obj_update_layout(ui->Album);

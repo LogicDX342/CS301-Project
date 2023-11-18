@@ -19,7 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "fatfs.h"
-#include "sdio.h"
+#include "spi.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -29,12 +29,14 @@
 #include "lcd.h"
 #include "touch.h"
 #include "24cxx.h"
+#include "ff.h"
 #include "lv_conf.h"
 #include "lv_port_disp.h"
 #include "lv_port_indev.h"
 #include "gui_guider.h"
 
 #include <stdio.h>
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -66,8 +68,46 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+// FRESULT f_res;                     
+// UINT bw;
+// BYTE ReadBuffer[1024]={0};       
+// BYTE WriteBuffer[]= "STM32CubeMX SDcard FATFS Test\r\n";
+ 
+// void mount_disk(void)
+// {
+//    f_res = f_mount(&USERFatFS, USERPath, 0);
+// }
+ 
+// void create_file(void)
+// {
+//     printf("write data is : %s\r\n",WriteBuffer);
+//     f_res = f_open(&USERFile, "test.txt", FA_OPEN_ALWAYS | FA_WRITE);
+//     f_res = f_write(&USERFile, WriteBuffer, sizeof(WriteBuffer), &bw);
+//     f_res = f_close(&USERFile);
+// }
+ 
+// void read_file(void)
+// {
+//     f_res = f_open(&USERFile, "test.txt", FA_READ);
+//     f_res = f_read(&USERFile, ReadBuffer, sizeof(WriteBuffer), &bw);
+//     printf("read data is : %s\r\n",ReadBuffer);
+//     f_res = f_close(&USERFile);
+// }
+ 
+// void umount_disk(void)
+// {
+//    f_res = f_mount(NULL, USERPath, 0);
+// }
+ 
+// void FatfsTest(void)
+// {
+//     mount_disk(); //挂载SD卡
+//     create_file();//创建TXT文件 
+//     read_file();  //读取文件内容并放到ReadBuffer中
+//     umount_disk();//卸载SD卡
+// }
+// lv_ui guider_ui;
 
-lv_ui guider_ui;
 /* USER CODE END 0 */
 
 /**
@@ -100,7 +140,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   MX_TIM6_Init();
-  MX_SDIO_SD_Init();
+  MX_SPI1_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
   // lv_init();
@@ -109,7 +149,9 @@ int main(void)
 
   // setup_ui(&guider_ui);
 
-  LCD_Init();
+  printf("\r\n ****** SDcard FatFs Example ******\r\n\r\n");
+  HAL_Delay (500);
+  // FatfsTest();
   /* USER CODE END 2 */
 
   /* Infinite loop */

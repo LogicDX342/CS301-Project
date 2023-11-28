@@ -1007,8 +1007,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "Homepage"
+			]
 		},
 		{
 			"name": "Album",
@@ -1325,8 +1324,7 @@
 							"radius": 3,
 							"bg_opa": 255
 						}
-					],
-					"layerName": "Album"
+					]
 				},
 				{
 					"name": "image",
@@ -1357,8 +1355,7 @@
 							"image_recolor_opa": 0,
 							"image_opa": 255
 						}
-					],
-					"layerName": "Album"
+					]
 				},
 				{
 					"name": "return_btn",
@@ -2071,8 +2068,7 @@
 						}
 					}
 				]
-			},
-			"layerName": "Album"
+			}
 		}
 	],
 	"FrontStatus": {},

@@ -77,11 +77,6 @@
 //修改SSD1963 LCD屏的驱动参数.
 //////////////////////////////////////////////////////////////////////////////////	 
 
-// void delay_us(uint32_t nus) {
-
-// }
-
-
 uint16_t POINT_COLOR = 0x0000;
 uint16_t BACK_COLOR = 0xFFFF;  // Background color
 

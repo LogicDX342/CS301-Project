@@ -139,11 +139,11 @@ void get_file_list()
             file_list[file_count] = (char *)malloc(strlen(fn) + 1);
             memset(file_list[file_count], 0, strlen(fn) + 1);
             strcpy(file_list[file_count], fn);
-            file_count++;
             lv_obj_t *list_btn = lv_list_add_btn(list, LV_SYMBOL_FILE, fn);
             lv_obj_add_event_cb(list_btn, list_event_cb, LV_EVENT_CLICKED, NULL);
         }
         lv_fs_dir_close(&dir);
+        file_count = lv_list_get_size(list);
         set_current_index(0);
     }
 }

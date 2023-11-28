@@ -106,6 +106,8 @@ int main(void)
   MX_SPI1_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
+  LCD_Init();
+  tp_dev.init();
   HAL_TIM_Base_Start_IT(&htim6);
   f_mount(&USERFatFS, USERPath, 0);
   printf("USERPath: %s\r\n", USERPath);

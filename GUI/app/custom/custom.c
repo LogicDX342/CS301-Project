@@ -143,7 +143,7 @@ void get_file_list()
             lv_obj_add_event_cb(list_btn, list_event_cb, LV_EVENT_CLICKED, NULL);
         }
         lv_fs_dir_close(&dir);
-        file_count = lv_list_get_size(list);
+        file_count = lv_obj_get_child_cnt(list);
         set_current_index(0);
     }
 }

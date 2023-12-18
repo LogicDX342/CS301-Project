@@ -214,7 +214,7 @@
 					"height": 80,
 					"default_style": false,
 					"long_mode": "LV_LABEL_LONG_WRAP",
-					"text": "Button",
+					"text": "Game",
 					"toggle": false,
 					"style": [
 						{
@@ -378,7 +378,7 @@
 					"height": 80,
 					"default_style": false,
 					"long_mode": "LV_LABEL_LONG_WRAP",
-					"text": "Button",
+					"text": "Chat",
 					"toggle": false,
 					"style": [
 						{
@@ -542,7 +542,7 @@
 					"height": 80,
 					"default_style": false,
 					"long_mode": "LV_LABEL_LONG_WRAP",
-					"text": "Button",
+					"text": "Calculator",
 					"toggle": false,
 					"style": [
 						{
@@ -706,7 +706,7 @@
 					"height": 80,
 					"default_style": false,
 					"long_mode": "LV_LABEL_LONG_WRAP",
-					"text": "Button",
+					"text": "Album",
 					"toggle": false,
 					"style": [
 						{
@@ -1007,7 +1007,8 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			]
+			],
+			"layerName": "Homepage"
 		},
 		{
 			"name": "Album",
@@ -1324,7 +1325,8 @@
 							"radius": 3,
 							"bg_opa": 255
 						}
-					]
+					],
+					"layerName": "Album"
 				},
 				{
 					"name": "image",
@@ -1355,7 +1357,8 @@
 							"image_recolor_opa": 0,
 							"image_opa": 255
 						}
-					]
+					],
+					"layerName": "Album"
 				},
 				{
 					"name": "return_btn",
@@ -1654,21 +1657,6 @@
 							}
 						]
 					}
-				}
-			],
-			"style": [
-				{
-					"part": "LV_PART_MAIN",
-					"state": "LV_STATE_DEFAULT",
-					"disable": false,
-					"bg_color": "#ffffff",
-					"bg_grad_dir": "LV_GRAD_DIR_NONE",
-					"bg_grad_color": "#2195f6",
-					"bg_opa": 0,
-					"bg_img_src": "",
-					"bg_img_opa": 255,
-					"bg_img_recolor": "#ffffff",
-					"bg_img_recolor_opa": 0
 				}
 			],
 			"event": {
@@ -2068,7 +2056,23 @@
 						}
 					}
 				]
-			}
+			},
+			"style": [
+				{
+					"part": "LV_PART_MAIN",
+					"state": "LV_STATE_DEFAULT",
+					"disable": false,
+					"bg_color": "#ffffff",
+					"bg_grad_dir": "LV_GRAD_DIR_NONE",
+					"bg_grad_color": "#2195f6",
+					"bg_opa": 0,
+					"bg_img_src": "",
+					"bg_img_opa": 255,
+					"bg_img_recolor": "#ffffff",
+					"bg_img_recolor_opa": 0
+				}
+			],
+			"layerName": "Album"
 		}
 	],
 	"FrontStatus": {},
@@ -2487,7 +2491,7 @@
 								"text_color": "#000000"
 							}
 						],
-						"text": "Button",
+						"text": "Album",
 						"long_mode": "LV_LABEL_LONG_WRAP",
 						"toggle": false
 					},
@@ -2656,7 +2660,7 @@
 								"text_color": "#000000"
 							}
 						],
-						"text": "Button",
+						"text": "Calculator",
 						"long_mode": "LV_LABEL_LONG_WRAP",
 						"toggle": false
 					},
@@ -2825,7 +2829,7 @@
 								"text_color": "#000000"
 							}
 						],
-						"text": "Button",
+						"text": "Chat",
 						"long_mode": "LV_LABEL_LONG_WRAP",
 						"toggle": false
 					},
@@ -2994,7 +2998,7 @@
 								"text_color": "#000000"
 							}
 						],
-						"text": "Button",
+						"text": "Game",
 						"long_mode": "LV_LABEL_LONG_WRAP",
 						"toggle": false
 					},
@@ -3193,21 +3197,6 @@
 				"chinese_library": "mini",
 				"keyboard_font_type": "simsun",
 				"keyboard_font_size": "18",
-				"style": [
-					{
-						"part": "LV_PART_MAIN",
-						"state": "LV_STATE_DEFAULT",
-						"disable": false,
-						"bg_color": "#ffffff",
-						"bg_grad_dir": "LV_GRAD_DIR_NONE",
-						"bg_grad_color": "#2195f6",
-						"bg_opa": 0,
-						"bg_img_src": "",
-						"bg_img_opa": 255,
-						"bg_img_recolor": "#ffffff",
-						"bg_img_recolor_opa": 0
-					}
-				],
 				"event": {
 					"screen_loaded": [
 						{
@@ -3252,6 +3241,21 @@
 						}
 					]
 				},
+				"style": [
+					{
+						"part": "LV_PART_MAIN",
+						"state": "LV_STATE_DEFAULT",
+						"disable": false,
+						"bg_color": "#ffffff",
+						"bg_grad_dir": "LV_GRAD_DIR_NONE",
+						"bg_grad_color": "#2195f6",
+						"bg_opa": 0,
+						"bg_img_src": "",
+						"bg_img_opa": 255,
+						"bg_img_recolor": "#ffffff",
+						"bg_img_recolor_opa": 0
+					}
+				],
 				"layerName": "Album",
 				"size": [
 					320,

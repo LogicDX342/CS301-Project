@@ -31,7 +31,7 @@ int Homepage_digital_clock_sec_value = 50;void setup_scr_Homepage(lv_ui *ui)
 	//Write codes Homepage_btn_1
 	ui->Homepage_btn_1 = lv_btn_create(ui->Homepage);
 	ui->Homepage_btn_1_label = lv_label_create(ui->Homepage_btn_1);
-	lv_label_set_text(ui->Homepage_btn_1_label, "Button");
+	lv_label_set_text(ui->Homepage_btn_1_label, "Album");
 	lv_label_set_long_mode(ui->Homepage_btn_1_label, LV_LABEL_LONG_WRAP);
 	lv_obj_align(ui->Homepage_btn_1_label, LV_ALIGN_CENTER, 0, 0);
 	lv_obj_set_style_pad_all(ui->Homepage_btn_1, 0, LV_STATE_DEFAULT);
@@ -51,7 +51,7 @@ int Homepage_digital_clock_sec_value = 50;void setup_scr_Homepage(lv_ui *ui)
 	//Write codes Homepage_btn_2
 	ui->Homepage_btn_2 = lv_btn_create(ui->Homepage);
 	ui->Homepage_btn_2_label = lv_label_create(ui->Homepage_btn_2);
-	lv_label_set_text(ui->Homepage_btn_2_label, "Button");
+	lv_label_set_text(ui->Homepage_btn_2_label, "Calculator");
 	lv_label_set_long_mode(ui->Homepage_btn_2_label, LV_LABEL_LONG_WRAP);
 	lv_obj_align(ui->Homepage_btn_2_label, LV_ALIGN_CENTER, 0, 0);
 	lv_obj_set_style_pad_all(ui->Homepage_btn_2, 0, LV_STATE_DEFAULT);
@@ -71,7 +71,7 @@ int Homepage_digital_clock_sec_value = 50;void setup_scr_Homepage(lv_ui *ui)
 	//Write codes Homepage_btn_3
 	ui->Homepage_btn_3 = lv_btn_create(ui->Homepage);
 	ui->Homepage_btn_3_label = lv_label_create(ui->Homepage_btn_3);
-	lv_label_set_text(ui->Homepage_btn_3_label, "Button");
+	lv_label_set_text(ui->Homepage_btn_3_label, "Chat");
 	lv_label_set_long_mode(ui->Homepage_btn_3_label, LV_LABEL_LONG_WRAP);
 	lv_obj_align(ui->Homepage_btn_3_label, LV_ALIGN_CENTER, 0, 0);
 	lv_obj_set_style_pad_all(ui->Homepage_btn_3, 0, LV_STATE_DEFAULT);
@@ -91,7 +91,7 @@ int Homepage_digital_clock_sec_value = 50;void setup_scr_Homepage(lv_ui *ui)
 	//Write codes Homepage_btn_4
 	ui->Homepage_btn_4 = lv_btn_create(ui->Homepage);
 	ui->Homepage_btn_4_label = lv_label_create(ui->Homepage_btn_4);
-	lv_label_set_text(ui->Homepage_btn_4_label, "Button");
+	lv_label_set_text(ui->Homepage_btn_4_label, "Game");
 	lv_label_set_long_mode(ui->Homepage_btn_4_label, LV_LABEL_LONG_WRAP);
 	lv_obj_align(ui->Homepage_btn_4_label, LV_ALIGN_CENTER, 0, 0);
 	lv_obj_set_style_pad_all(ui->Homepage_btn_4, 0, LV_STATE_DEFAULT);

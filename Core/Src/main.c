@@ -111,14 +111,10 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim6);
   f_mount(&USERFatFS, USERPath, 0);
   printf("USERPath: %s\r\n", USERPath);
-  // HAL_TIM_Base_Start_IT(&htim6);
   lv_init();
   lv_port_disp_init();
   lv_port_indev_init();
-  // create_button_and_image();
-  // create_file_list();
   setup_ui(&guider_ui);
-  //  lv_obj_add_event_cb(lv_scr_act(), scr_event_cb, LV_EVENT_GESTURE, NULL);
   /* USER CODE END 2 */
 
   /* Infinite loop */

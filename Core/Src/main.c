@@ -28,6 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include "lcd.h"
 #include "touch.h"
+#include "remote.h"
 #include "24cxx.h"
 #include "ff.h"
 #include "lv_conf.h"
@@ -68,8 +69,6 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
-
 lv_ui guider_ui;
 /* USER CODE END 0 */
 
@@ -102,10 +101,12 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
-  MX_TIM6_Init();
   MX_SPI1_Init();
   MX_FATFS_Init();
+  MX_TIM5_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
+  Remote_Init(); 
   LCD_Init();
   tp_dev.init();
   HAL_TIM_Base_Start_IT(&htim6);

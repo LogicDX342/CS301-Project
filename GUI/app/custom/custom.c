@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include "lvgl.h"
 #include "custom.h"
+#include "remote.h"
 
 /*********************
  *      DEFINES
@@ -107,12 +108,35 @@ static void list_event_cb(lv_event_t *e)
         lv_img_set_src(img_obj, path);
         for (int i = 0; i < file_count; i++)
         {
+            printf("file_list[%d]: %s\r\n", i, file_list[i]);
+            printf("lv_list_get_btn_text(list, obj): %s\r\n", lv_list_get_btn_text(list, obj));
             if (strcmp(file_list[i], lv_list_get_btn_text(list, obj)) == 0)
             {
                 current_file_index = i;
                 set_current_index(current_file_index);
                 break;
             }
+        }
+    }
+}
+
+extern uint8_t RmtCnt;
+void read_remote()
+{
+    uint8_t key = Remote_Scan();
+    if (key != 0 && RmtCnt > 1)
+    {
+        RmtCnt = 0;
+        switch (key)
+        {
+        case 98:
+            set_prev_image();
+            break;
+        case 168:
+            set_next_image();
+            break;
+        default:
+            break;
         }
     }
 }
@@ -136,14 +160,19 @@ void get_file_list()
                 break;
             }
             my_tolower(fn);
-            file_list[file_count] = (char *)malloc(strlen(fn) + 1);
-            memset(file_list[file_count], 0, strlen(fn) + 1);
+            file_list[file_count] = (char *)malloc(strlen(fn) + 2);
+            memset(file_list[file_count], 0, strlen(fn) + 2);
             strcpy(file_list[file_count], fn);
+            printf("file_list[%d]: %s\r\n", file_count, file_list[file_count]);
             lv_obj_t *list_btn = lv_list_add_btn(list, LV_SYMBOL_FILE, fn);
             lv_obj_add_event_cb(list_btn, list_event_cb, LV_EVENT_CLICKED, NULL);
+            file_count++;
         }
         lv_fs_dir_close(&dir);
         file_count = lv_obj_get_child_cnt(list);
         set_current_index(0);
     }
+    //use lvgl timer to read remote
+    lv_timer_t *timer = lv_timer_create(read_remote, 100, NULL);
+    lv_timer_set_repeat_count(timer, -1);
 }

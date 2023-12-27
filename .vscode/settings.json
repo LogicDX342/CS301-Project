@@ -5,6 +5,7 @@
         "lv_port_disp.h": "c",
         "lv_port_indev.h": "c",
         "MMC_SD.C": "cpp",
-        "lv_calendar_header_dropdown.h": "c"
+        "lv_calendar_header_dropdown.h": "c",
+        "stm32f1xx_hal.h": "c"
     }
 }

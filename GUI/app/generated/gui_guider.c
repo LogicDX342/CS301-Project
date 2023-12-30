@@ -25,12 +25,15 @@ void init_scr_del_flag(lv_ui *ui)
   
 	ui->Homepage_del = true;
 	ui->Album_del = true;
-	ui->PrivateChat_del = true;
+	ui->Chat_del = true;
+	ui->Chat_0_del = true;
+	ui->Chat_1_del = true;
+	ui->Group_del = true;
 }
 
 void setup_ui(lv_ui *ui)
 {
   init_scr_del_flag(ui);
-  setup_scr_Homepage(ui);
-  lv_scr_load(ui->Homepage);
+  setup_scr_Chat(ui);
+  lv_scr_load(ui->Chat);
 }

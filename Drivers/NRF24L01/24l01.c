@@ -13,15 +13,37 @@
 //Copyright(C) 广州市星翼电子科技有限公司 2009-2019
 //All rights reserved									  
 //////////////////////////////////////////////////////////////////////////////////
-    
-const u8 TX_ADDRESS[TX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //发送地址
-const u8 RX_ADDRESS[RX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //发送地址
+
+extern u8 current_user;
+
+//Jerry's configuration begin
+const u8 TX_ADDRESS0[TX_ADR_WIDTH]={0x35,0x43,0x10,0x10,0x01}; //TO Tom
+const u8 TX_ADDRESS1[TX_ADR_WIDTH]={0x36,0x43,0x10,0x10,0x01};//TO Scott
+const u8 RX_ADDRESS0[RX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01};
+//Jerry's configuration end
 
 
-//初始化24L01的IO口
+////Tom's configuration begin
+//const u8 TX_ADDRESS0[TX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //TO Jerry
+//const u8 TX_ADDRESS1[TX_ADR_WIDTH]={0x36,0x43,0x10,0x10,0x01};//TO Scott
+//const u8 RX_ADDRESS0[RX_ADR_WIDTH]={0x35,0x43,0x10,0x10,0x01};
+////Tom's configuration end
+
+
+////Scott's configuration begin
+//const u8 TX_ADDRESS0[TX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //TO Jerry
+//const u8 TX_ADDRESS1[TX_ADR_WIDTH]={0x35,0x43,0x10,0x10,0x01};//TO Tom
+//const u8 RX_ADDRESS0[RX_ADR_WIDTH]={0x36,0x43,0x10,0x10,0x01};
+////Scott's configuration end
+
+
+
+//初始化24L01的IO
 
 void NRF24L01_Init(void)
 {  
+
+
 	GPIO_InitTypeDef GPIO_InitStructure;
 	SPI_InitTypeDef  SPI_InitStructure; 
 	
@@ -176,12 +198,13 @@ u8 NRF24L01_RxPacket(u8 *rxbuf)
 void NRF24L01_RX_Mode(void)
 {
 	NRF24L01_CE=0;	  
-  	NRF24L01_Write_Buf(NRF_WRITE_REG+RX_ADDR_P0,(u8*)RX_ADDRESS,RX_ADR_WIDTH);//写RX节点地址
-	  
-  	NRF24L01_Write_Reg(NRF_WRITE_REG+EN_AA,0x01);    	//使能通道0的自动应答    
-  	NRF24L01_Write_Reg(NRF_WRITE_REG+EN_RXADDR,0x01);	//使能通道0的接收地址  	 
+  	NRF24L01_Write_Buf(NRF_WRITE_REG+RX_ADDR_P0,(u8*)RX_ADDRESS0,RX_ADR_WIDTH);//写RX节点地址
+//  	NRF24L01_Write_Buf(NRF_WRITE_REG+RX_ADDR_P1,(u8*)RX_ADDRESS1,RX_ADR_WIDTH);//写RX节点地址
+  	NRF24L01_Write_Reg(NRF_WRITE_REG+EN_AA,0x3f);    	//使能所有通道的自动应答
+  	NRF24L01_Write_Reg(NRF_WRITE_REG+EN_RXADDR,0x3f);	//使能所有通道的接收地址
   	NRF24L01_Write_Reg(NRF_WRITE_REG+RF_CH,40);	    	//设置RF通信频率		  
-  	NRF24L01_Write_Reg(NRF_WRITE_REG+RX_PW_P0,RX_PLOAD_WIDTH);//选择通道0的有效数据宽度 	    
+  	NRF24L01_Write_Reg(NRF_WRITE_REG+RX_PW_P0,RX_PLOAD_WIDTH);//选择通道0的有效数据宽度
+  	NRF24L01_Write_Reg(NRF_WRITE_REG+RX_PW_P1,RX_PLOAD_WIDTH);//选择通道1的有效数据宽度
   	NRF24L01_Write_Reg(NRF_WRITE_REG+RF_SETUP,0x0f);	//设置TX发射参数,0db增益,2Mbps,低噪声增益开启   
   	NRF24L01_Write_Reg(NRF_WRITE_REG+CONFIG, 0x0f);		//配置基本工作模式的参数;PWR_UP,EN_CRC,16BIT_CRC,接收模式 
   	NRF24L01_CE = 1; //CE为高,进入接收模式 
@@ -191,14 +214,18 @@ void NRF24L01_RX_Mode(void)
 //PWR_UP,CRC使能
 //当CE变高后,即进入RX模式,并可以接收数据了		   
 //CE为高大于10us,则启动发送.	 
-void NRF24L01_TX_Mode(void)
+void NRF24L01_TX_Mode(u8 user)
 {														 
-	NRF24L01_CE=0;	    
-  	NRF24L01_Write_Buf(NRF_WRITE_REG+TX_ADDR,(u8*)TX_ADDRESS,TX_ADR_WIDTH);//写TX节点地址 
-  	NRF24L01_Write_Buf(NRF_WRITE_REG+RX_ADDR_P0,(u8*)RX_ADDRESS,RX_ADR_WIDTH); //设置TX节点地址,主要为了使能ACK	  
-
-  	NRF24L01_Write_Reg(NRF_WRITE_REG+EN_AA,0x01);     //使能通道0的自动应答    
-  	NRF24L01_Write_Reg(NRF_WRITE_REG+EN_RXADDR,0x01); //使能通道0的接收地址  
+	NRF24L01_CE=0;
+	if(user == 0){
+		NRF24L01_Write_Buf(NRF_WRITE_REG+TX_ADDR,(u8*)TX_ADDRESS0,TX_ADR_WIDTH);//写TX节点地址
+		NRF24L01_Write_Buf(NRF_WRITE_REG+RX_ADDR_P0,(u8*)TX_ADDRESS0,RX_ADR_WIDTH); //设置TX节点地址,主要为了使能ACK
+	}else{
+		NRF24L01_Write_Buf(NRF_WRITE_REG+TX_ADDR,(u8*)TX_ADDRESS1,TX_ADR_WIDTH);//写TX节点地址
+		NRF24L01_Write_Buf(NRF_WRITE_REG+RX_ADDR_P0,(u8*)TX_ADDRESS1,RX_ADR_WIDTH); //设置TX节点地址,主要为了使能ACK
+	}
+  	NRF24L01_Write_Reg(NRF_WRITE_REG+EN_AA,0x3f);     //使能所有通道的自动应答
+  	NRF24L01_Write_Reg(NRF_WRITE_REG+EN_RXADDR,0x3f); //使能所有通道的接收地址
   	NRF24L01_Write_Reg(NRF_WRITE_REG+SETUP_RETR,0x1a);//设置自动重发间隔时间:500us + 86us;最大自动重发次数:10次
   	NRF24L01_Write_Reg(NRF_WRITE_REG+RF_CH,40);       //设置RF通道为40
   	NRF24L01_Write_Reg(NRF_WRITE_REG+RF_SETUP,0x0f);  //设置TX发射参数,0db增益,2Mbps,低噪声增益开启   

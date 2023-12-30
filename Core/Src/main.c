@@ -134,70 +134,84 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    // while (NRF24L01_Check()) // 检查NRF24L01是否在位.
-    // {
-    //   LCD_ShowString(60, 130, 200, 16, 16, "NRF24L01 Error");
-    //   HAL_Delay(200);
-    //   LCD_Fill(60, 130, 239, 130 + 16, WHITE);
-    //   HAL_Delay(200);
-    // }
-    // LCD_ShowString(60, 130, 200, 16, 16, "NRF24L01 OK");
-    // mode=0;
-    // LCD_Fill(10, 150, 240, 166, WHITE); // 清空上面的显示
-    // POINT_COLOR = BLUE;                 // 设置字体为蓝色
-    // if (mode == 0)                      // RX模式
-    // {
-    //   LCD_ShowString(60, 150, 200, 16, 16, "NRF24L01 RX_Mode");
-    //   LCD_ShowString(60, 170, 200, 16, 16, "Received DATA:");
-    //   NRF24L01_RX_Mode();
-    //   while (1)
-    //   {
-    //     if (NRF24L01_RxPacket(tmp_buf) == 0) // 一旦接收到信息,则显示出来.
-    //     {
-    //       tmp_buf[32] = 0; // 加入字符串结束符
-    //       LCD_ShowString(0, 190, 239, 32, 16, tmp_buf);
-    //     }
-    //     else
-    //       delay_us(100);
-    //     t++;
-    //     if (t == 10000) // 大约1s钟改变一次状态
-    //     {
-    //       t = 0;
-    //     }
-    //   };
-    // }
-    // else // TX模式
-    // {
-    //   LCD_ShowString(60, 150, 200, 16, 16, "NRF24L01 TX_Mode");
-    //   NRF24L01_TX_Mode();
-    //   mode = ' '; // 从空格键开始
-    //   while (1)
-    //   {
-    //     if (NRF24L01_TxPacket(tmp_buf) == TX_OK)
-    //     {
-    //       LCD_ShowString(60, 170, 239, 32, 16, "Sended DATA:");
-    //       LCD_ShowString(0, 190, 239, 32, 16, tmp_buf);
-    //       key = mode;
-    //       for (t = 0; t < 32; t++)
-    //       {
-    //         key++;
-    //         if (key > ('~'))
-    //           key = ' ';
-    //         tmp_buf[t] = key;
-    //       }
-    //       mode++;
-    //       if (mode > '~')
-    //         mode = ' ';
-    //       tmp_buf[32] = 0; // 加入结束符
-    //     }
-    //     else
-    //     {
-    //       LCD_ShowString(60, 170, 239, 32, 16, "Send Failed ");
-    //       LCD_Fill(0, 188, 240, 218, WHITE); // 清空上面的显示
-    //     };
-    //     HAL_Delay(1500);
-    //   };
-    // }
+     while (NRF24L01_Check()) // 检查NRF24L01是否在位.
+     {
+       LCD_ShowString(60, 130, 200, 16, 16, "NRF24L01 Error");
+       HAL_Delay(200);
+       LCD_Fill(60, 130, 239, 130 + 16, WHITE);
+       HAL_Delay(200);
+     }
+     LCD_ShowString(60, 130, 200, 16, 16, "NRF24L01 OK");
+
+
+     mode=1;
+
+
+     LCD_Fill(10, 150, 240, 166, WHITE); // 清空上面的显示
+     POINT_COLOR = BLUE;                 // 设置字体为蓝色
+     if (mode == 0)                      // RX模式
+     {
+       LCD_ShowString(60, 150, 200, 16, 16, "NRF24L01 RX_Mode");
+       LCD_ShowString(60, 170, 200, 16, 16, "Received DATA:");
+       NRF24L01_RX_Mode();
+       while (1)
+       {
+         if (NRF24L01_RxPacket(tmp_buf) == 0) // 一旦接收到信息,则显示出来.
+         {
+           tmp_buf[32] = 0; // 加入字符串结束符
+           LCD_ShowString(0, 190, 239, 32, 16, tmp_buf);
+         }
+         else
+           delay_us(100);
+         t++;
+         if (t == 10000) // 大约1s钟改变一次状态
+         {
+           t = 0;
+         }
+       };
+     }
+     else // TX模式
+     {
+       LCD_ShowString(60, 150, 200, 16, 16, "NRF24L01 TX_Mode");
+       NRF24L01_TX_Mode(1);
+       mode = ' '; // 从空格键开始
+       key = mode;
+	  for (t = 0; t < 32; t++)
+	  {
+		key++;
+		if (key > ('~'))
+		  key = ' ';
+		tmp_buf[t] = key;
+	  }
+	  tmp_buf[32] = 0; // 加入结束符
+         if (NRF24L01_TxPacket(tmp_buf) == TX_OK)
+         {
+           LCD_ShowString(60, 170, 239, 32, 16, "Sended DATA:");
+           LCD_ShowString(0, 190, 239, 32, 16, tmp_buf);
+           key = mode;
+           for (t = 0; t < 32; t++)
+           {
+             key++;
+             if (key > ('~'))
+               key = ' ';
+             tmp_buf[t] = key;
+           }
+           mode++;
+           if (mode > '~')
+             mode = ' ';
+           tmp_buf[32] = 0; // 加入结束符
+         }
+         else
+         {
+           LCD_ShowString(60, 170, 239, 32, 16, "Send Failed ");
+           LCD_Fill(0, 188, 240, 218, WHITE); // 清空上面的显示
+         };
+         HAL_Delay(1500);
+
+         while (1)
+                {
+       };
+     }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

@@ -24,7 +24,7 @@ void send(uint8_t msg_type, uint8_t user, uint8_t *msg)
     uint8_t arg = (msg_type << 6) | (user << 4);
     // set the first char of the message to the argument
     // if message is too long, send it in multiple packets
-    int len = strlen(msg);
+    uint32_t len = strlen(msg);
     for (int i = 0; i < len; i += TX_PLOAD_WIDTH - 1)
     {
         tx_buf[0] = arg || (i + TX_PLOAD_WIDTH - 1 < len ? CONTINUE : END);
@@ -84,6 +84,5 @@ void receive(lv_timer_t *timer)
         default:
             break;
         }
-        return NULL;
     }
 }

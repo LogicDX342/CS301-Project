@@ -37,6 +37,39 @@ typedef struct
 	lv_obj_t *Album_image;
 	lv_obj_t *Album_file_list;
 	lv_obj_t *Album_count_label;
+	lv_obj_t *Chat;
+	bool Chat_del;
+	lv_obj_t *Chat_btn_1;
+	lv_obj_t *Chat_btn_1_label;
+	lv_obj_t *Chat_btn_2;
+	lv_obj_t *Chat_btn_2_label;
+	lv_obj_t *Chat_btn_3;
+	lv_obj_t *Chat_btn_3_label;
+	lv_obj_t *Chat_btn_4;
+	lv_obj_t *Chat_btn_4_label;
+	lv_obj_t *Chat_0;
+	bool Chat_0_del;
+	lv_obj_t *Chat_0_label_1;
+	lv_obj_t *Chat_0_list_1;
+	lv_obj_t *Chat_0_list_1_item0;
+	lv_obj_t *Chat_0_btn_1;
+	lv_obj_t *Chat_0_btn_1_label;
+	lv_obj_t *Chat_1;
+	bool Chat_1_del;
+	lv_obj_t *Chat_1_label_1;
+	lv_obj_t *Chat_1_list_1;
+	lv_obj_t *Chat_1_list_1_item0;
+	lv_obj_t *Chat_1_btn_1;
+	lv_obj_t *Chat_1_btn_1_label;
+	lv_obj_t *Group;
+	bool Group_del;
+	lv_obj_t *Group_label_1;
+	lv_obj_t *Group_label_2;
+	lv_obj_t *Group_label_3;
+	lv_obj_t *Group_list_1;
+	lv_obj_t *Group_list_1_item0;
+	lv_obj_t *Group_btn_1;
+	lv_obj_t *Group_btn_1_label;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);
@@ -46,6 +79,10 @@ extern lv_ui guider_ui;
 
 void setup_scr_Homepage(lv_ui *ui);
 void setup_scr_Album(lv_ui *ui);
+void setup_scr_Chat(lv_ui *ui);
+void setup_scr_Chat_0(lv_ui *ui);
+void setup_scr_Chat_1(lv_ui *ui);
+void setup_scr_Group(lv_ui *ui);
 LV_IMG_DECLARE(__135x148);
 
 LV_FONT_DECLARE(lv_font_montserratMedium_14)

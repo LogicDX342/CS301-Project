@@ -66,11 +66,14 @@
 #define RX_ADR_WIDTH    5   	//5字节的地址宽度
 #define TX_PLOAD_WIDTH  32  	//32字节的用户数据宽度
 #define RX_PLOAD_WIDTH  32  	//32字节的用户数据宽度
-									   	   
+
+#define Tom 0		//定义用户
+#define Jerry 1
+#define Scott 2
 
 void NRF24L01_Init(void);//初始化
 void NRF24L01_RX_Mode(void);//配置为接收模式
-void NRF24L01_TX_Mode(void);//配置为发送模式
+void NRF24L01_TX_Mode(u8 target);//配置为发送模式
 u8 NRF24L01_Write_Buf(u8 reg, u8 *pBuf, u8 u8s);//写数据区
 u8 NRF24L01_Read_Buf(u8 reg, u8 *pBuf, u8 u8s);//读数据区		  
 u8 NRF24L01_Read_Reg(u8 reg);			//读寄存器

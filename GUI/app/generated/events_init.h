@@ -20,6 +20,10 @@ void events_init(lv_ui *ui);
 
 void events_init_Homepage(lv_ui *ui);
 void events_init_Album(lv_ui *ui);
+void events_init_Chat(lv_ui *ui);
+void events_init_Chat_0(lv_ui *ui);
+void events_init_Chat_1(lv_ui *ui);
+void events_init_Group(lv_ui *ui);
 
 #ifdef __cplusplus
 }

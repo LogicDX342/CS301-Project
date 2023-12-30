@@ -51,3 +51,6 @@ Middlewares/ST
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+GUI-Guider-Projects/GUI/generated
+GUI/app/generated

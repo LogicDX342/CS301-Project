@@ -35,8 +35,6 @@ void send(uint8_t msg_type, uint8_t user, uint8_t *msg)
 
 void msgbox_event_cb(lv_event_t *e)
 {
-    // lv_obj_t *obj = lv_event_get_target(e);
-    // lv_msgbox_close(obj);
 }
 
 void pop_msgbox(char *msg)
@@ -52,12 +50,6 @@ void receive(lv_timer_t *timer)
 {
     if (!NRF24L01_RxPacket(rx_buf))
     {
-        if (lv_scr_act() == guider_ui.Album)
-        {
-            pop_msgbox("Album");
-            return;
-        }
-        return;
         uint8_t msg_type = rx_buf[0] >> 6;
         uint8_t user = (rx_buf[0] >> 4) & 0b11;
         uint8_t end = rx_buf[0] & 0b01;

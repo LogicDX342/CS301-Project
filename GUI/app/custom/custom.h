@@ -14,11 +14,11 @@ extern "C" {
 #endif
 
 #include "gui_guider.h"
+#include "album.h"
+#include "chat.h"
 
 void custom_init(lv_ui *ui);
-void get_file_list();
-void set_prev_image();
-void set_next_image();
+void start_msg_timer();
 
 #ifdef __cplusplus
 }

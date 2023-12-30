@@ -25,6 +25,7 @@ void init_scr_del_flag(lv_ui *ui)
   
 	ui->Homepage_del = true;
 	ui->Album_del = true;
+	ui->PrivateChat_del = true;
 }
 
 void setup_ui(lv_ui *ui)

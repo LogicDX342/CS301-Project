@@ -555,7 +555,7 @@
 
 #define LV_USE_METER      0
 
-#define LV_USE_MSGBOX     0
+#define LV_USE_MSGBOX     1
 
 #define LV_USE_SPAN       0
 #if LV_USE_SPAN

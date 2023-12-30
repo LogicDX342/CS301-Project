@@ -153,6 +153,52 @@ int Homepage_digital_clock_sec_value = 50;void setup_scr_Homepage(lv_ui *ui)
 	lv_obj_set_style_pad_left(ui->Homepage_digital_clock, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_obj_set_style_shadow_width(ui->Homepage_digital_clock, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
+	//Write codes Homepage_msgbox_1
+	static const char * Homepage_msgbox_1_btns[] = {"Apply","Close",""};
+	ui->Homepage_msgbox_1 = lv_msgbox_create(ui->Homepage, "Title", "content", Homepage_msgbox_1_btns, true);
+	lv_obj_set_size(lv_msgbox_get_btns(ui->Homepage_msgbox_1), 120, 30);
+	lv_obj_set_pos(ui->Homepage_msgbox_1, 20, 45);
+	lv_obj_set_size(ui->Homepage_msgbox_1, 280, 150);
+
+	//Write style for Homepage_msgbox_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_bg_opa(ui->Homepage_msgbox_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_color(ui->Homepage_msgbox_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->Homepage_msgbox_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->Homepage_msgbox_1, 4, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->Homepage_msgbox_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write style state: LV_STATE_DEFAULT for &style_Homepage_msgbox_1_extra_title_main_default
+	static lv_style_t style_Homepage_msgbox_1_extra_title_main_default;
+	ui_init_style(&style_Homepage_msgbox_1_extra_title_main_default);
+	
+	lv_style_set_text_color(&style_Homepage_msgbox_1_extra_title_main_default, lv_color_hex(0x4e4e4e));
+	lv_style_set_text_font(&style_Homepage_msgbox_1_extra_title_main_default, &lv_font_montserratMedium_12);
+	lv_style_set_text_letter_space(&style_Homepage_msgbox_1_extra_title_main_default, 0);
+	lv_style_set_text_line_space(&style_Homepage_msgbox_1_extra_title_main_default, 30);
+	lv_obj_add_style(lv_msgbox_get_title(ui->Homepage_msgbox_1), &style_Homepage_msgbox_1_extra_title_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write style state: LV_STATE_DEFAULT for &style_Homepage_msgbox_1_extra_content_main_default
+	static lv_style_t style_Homepage_msgbox_1_extra_content_main_default;
+	ui_init_style(&style_Homepage_msgbox_1_extra_content_main_default);
+	
+	lv_style_set_text_color(&style_Homepage_msgbox_1_extra_content_main_default, lv_color_hex(0x4e4e4e));
+	lv_style_set_text_font(&style_Homepage_msgbox_1_extra_content_main_default, &lv_font_montserratMedium_12);
+	lv_style_set_text_letter_space(&style_Homepage_msgbox_1_extra_content_main_default, 0);
+	lv_style_set_text_line_space(&style_Homepage_msgbox_1_extra_content_main_default, 10);
+	lv_obj_add_style(lv_msgbox_get_text(ui->Homepage_msgbox_1), &style_Homepage_msgbox_1_extra_content_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write style state: LV_STATE_DEFAULT for &style_Homepage_msgbox_1_extra_btns_items_default
+	static lv_style_t style_Homepage_msgbox_1_extra_btns_items_default;
+	ui_init_style(&style_Homepage_msgbox_1_extra_btns_items_default);
+	
+	lv_style_set_bg_opa(&style_Homepage_msgbox_1_extra_btns_items_default, 255);
+	lv_style_set_bg_color(&style_Homepage_msgbox_1_extra_btns_items_default, lv_color_hex(0xe6e6e6));
+	lv_style_set_border_width(&style_Homepage_msgbox_1_extra_btns_items_default, 0);
+	lv_style_set_radius(&style_Homepage_msgbox_1_extra_btns_items_default, 10);
+	lv_style_set_text_color(&style_Homepage_msgbox_1_extra_btns_items_default, lv_color_hex(0x4e4e4e));
+	lv_style_set_text_font(&style_Homepage_msgbox_1_extra_btns_items_default, &lv_font_montserratMedium_12);
+	lv_obj_add_style(lv_msgbox_get_btns(ui->Homepage_msgbox_1), &style_Homepage_msgbox_1_extra_btns_items_default, LV_PART_ITEMS|LV_STATE_DEFAULT);
+
 	//Update current screen layout.
 	lv_obj_update_layout(ui->Homepage);
 

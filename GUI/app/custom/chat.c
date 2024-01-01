@@ -36,18 +36,51 @@ void send(uint8_t msg_type, uint8_t sender, uint8_t receiver, uint8_t *msg)
     }
 }
 
-void msgbox_event_cb(lv_event_t *e)
+void msgbox_event_cb0(lv_event_t *e)
 {
-
+	//Write the load screen code.
+	lv_obj_t * act_scr = lv_scr_act();
+	lv_disp_t * d = lv_obj_get_disp(act_scr);
+	if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
+		lv_obj_clean(act_scr);
+		if (guider_ui.user0_del == true) {
+		  setup_scr_user0(&guider_ui);
+		}
+		lv_scr_load_anim(guider_ui.user0, LV_SCR_LOAD_ANIM_NONE, 200, 200, true);
+		guider_ui.chat_del = true;
+	}
 }
 
-void pop_msgbox(char *msg)
+void msgbox_event_cb1(lv_event_t *e)
+{
+	//Write the load screen code.
+    lv_obj_t * act_scr = lv_scr_act();
+    lv_disp_t * d = lv_obj_get_disp(act_scr);
+    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {
+		lv_obj_clean(act_scr);
+        if (guider_ui.user1_del == true) {
+          setup_scr_user1(&guider_ui);
+        }
+        lv_scr_load_anim(guider_ui.user1, LV_SCR_LOAD_ANIM_NONE, 200, 200, true);
+        guider_ui.chat_del = true;
+    }
+}
+void pop_msgbox0(char *msg)
 {
     static const char * btns[2] = {"Apply" , ""};
     lv_obj_t *msgbox = lv_msgbox_create(lv_scr_act(), "Notice", msg, btns, true);
     lv_obj_set_width(msgbox, 200);
     lv_obj_align(msgbox, LV_ALIGN_CENTER, 0, 0);
-    lv_obj_add_event_cb(msgbox, msgbox_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
+    lv_obj_add_event_cb(msgbox, msgbox_event_cb0, LV_EVENT_VALUE_CHANGED, NULL);
+}
+
+void pop_msgbox1(char *msg)
+{
+    static const char * btns[2] = {"Apply" , ""};
+    lv_obj_t *msgbox = lv_msgbox_create(lv_scr_act(), "Notice", msg, btns, true);
+    lv_obj_set_width(msgbox, 200);
+    lv_obj_align(msgbox, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_add_event_cb(msgbox, msgbox_event_cb1, LV_EVENT_VALUE_CHANGED, NULL);
 }
 
 void receive(lv_timer_t *timer)
@@ -142,7 +175,12 @@ void receive(lv_timer_t *timer)
             if (lv_scr_act() != guider_ui.Album)
             {
             	printf("enter pop\n");
-                pop_msgbox(msg);
+            	if(user == friend_0){
+            		pop_msgbox0(msg);
+            	}else if(user == friend_1){
+            		pop_msgbox1(msg);
+            	}
+
             }
             break;
         case ECHO:

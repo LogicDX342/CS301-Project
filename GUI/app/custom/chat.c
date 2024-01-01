@@ -10,6 +10,8 @@ char msg_buf[RX_PLOAD_WIDTH * 2 + 1]={0x0};
 uint8_t rx_buf[RX_PLOAD_WIDTH + 1];
 uint8_t tx_buf[TX_PLOAD_WIDTH];
 
+
+
 void send(uint8_t msg_type, uint8_t sender, uint8_t receiver, uint8_t *msg)
 {
 	printf("enter send()\n");
@@ -36,6 +38,7 @@ void send(uint8_t msg_type, uint8_t sender, uint8_t receiver, uint8_t *msg)
 
 void msgbox_event_cb(lv_event_t *e)
 {
+
 }
 
 void pop_msgbox(char *msg)

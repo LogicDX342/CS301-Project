@@ -76,6 +76,8 @@ u8 tmp_buf[33];
 u16 t=0;
 extern UART_HandleTypeDef huart1;
 extern uint8_t uBuffer[20];
+u8 user0_online = 0;
+u8 user1_online = 0;
 /* USER CODE END 0 */
 
 /**
@@ -132,6 +134,23 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  t++;
+	  if(t == 2000){
+		  t = 0;
+		  if(lv_scr_act() == guider_ui.chat){
+			  if(user0_online){
+				  lv_obj_set_style_text_color(guider_ui.chat_btn_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+			  }else{
+				  lv_obj_set_style_text_color(guider_ui.chat_btn_1, lv_color_hex(0xff0000), LV_PART_MAIN|LV_STATE_DEFAULT);
+			  }
+
+			  if(user1_online){
+				  lv_obj_set_style_text_color(guider_ui.chat_btn_2, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+			  }else{
+				  lv_obj_set_style_text_color(guider_ui.chat_btn_2, lv_color_hex(0xff0000), LV_PART_MAIN|LV_STATE_DEFAULT);
+			  }
+		  }
+	  }
 
     /* USER CODE END WHILE */
 

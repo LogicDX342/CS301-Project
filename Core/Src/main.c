@@ -76,6 +76,7 @@ u8 tmp_buf[33];
 u16 t=0;
 extern UART_HandleTypeDef huart1;
 extern uint8_t uBuffer[20];
+extern u8 current_user;
 u8 user0_online = 0;
 u8 user1_online = 0;
 /* USER CODE END 0 */
@@ -132,6 +133,15 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  if(lv_scr_act() == guider_ui.Homepage){
+  		  if(current_user == 0){
+  		  	  lv_label_set_text(guider_ui.Homepage_username_label, "Jerry");
+  		    }else if (current_user == 1){
+  		  	  lv_label_set_text(guider_ui.Homepage_username_label, "Tom");
+  		    }else if (current_user == 2){
+  		  	  lv_label_set_text(guider_ui.Homepage_username_label, "Scott");
+  		    }
+  }
   while (1)
   {
 //	  t++;
@@ -151,6 +161,7 @@ int main(void)
 //			  }
 //		  }
 //	  }
+
 
     /* USER CODE END WHILE */
 

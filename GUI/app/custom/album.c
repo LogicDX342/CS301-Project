@@ -19,7 +19,7 @@ char *my_tolower(char *str)
 }
 
 char *file_list[5];
-char count_str[5];
+char count_str[10];
 int file_count = 0;
 int current_file_index = 0;
 
@@ -134,7 +134,9 @@ void get_file_list()
         file_count = lv_obj_get_child_cnt(list);
         set_current_index(0);
     }
-    // use lvgl timer to read remote
-    lv_timer_t *timer = lv_timer_create(read_remote, 100, NULL);
-    lv_timer_set_repeat_count(timer, -1);
+    static lv_timer_t *timer = NULL;
+    if (timer == NULL) {
+        timer = lv_timer_create(read_remote, 100, NULL);
+        lv_timer_set_repeat_count(timer, -1);
+    }
 }

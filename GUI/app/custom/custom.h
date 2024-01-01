@@ -17,6 +17,7 @@ extern "C" {
 #include "album.h"
 #include "chat.h"
 #include "calculator.h"
+#include "game.h"
 
 void custom_init(lv_ui *ui);
 void start_msg_timer();

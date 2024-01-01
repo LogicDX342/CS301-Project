@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include "lvgl.h"
 #include "custom.h"
+#include "24l01.h"
 
 /*********************
  *      DEFINES

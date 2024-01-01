@@ -19,6 +19,7 @@ void custom_init(lv_ui *ui);
 void get_file_list();
 void set_prev_image();
 void set_next_image();
+void start_msg_timer();
 int precedence(char op);
 int applyOp(int a, int b, char op);
 char *evaluateExpression(char *expression);
@@ -78,6 +79,18 @@ void click_eq_nex();
 void click_eq_del();
 void click_eq_clean();
 void click_eq_eql();
+
+#define SIZE 4
+
+void game_init();
+void printBoard();
+void addRandom();
+bool checkGameOver();
+void moveLeft();
+void moveRight();
+void moveUp();
+void moveDown();
+int findMax();
 
 #ifdef __cplusplus
 }

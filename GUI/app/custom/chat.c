@@ -16,15 +16,15 @@
 lv_obj_t *usr_scr[4] = {&guider_ui.Album};
 
 char msg_buf[RX_PLOAD_WIDTH * 2 + 1];
-char rx_buf[RX_PLOAD_WIDTH + 1];
-char tx_buf[TX_PLOAD_WIDTH];
+uint8_t rx_buf[RX_PLOAD_WIDTH + 1];
+uint8_t tx_buf[TX_PLOAD_WIDTH];
 
 void send(uint8_t msg_type, uint8_t user, uint8_t *msg)
 {
     uint8_t arg = (msg_type << 6) | (user << 4);
     // set the first char of the message to the argument
     // if message is too long, send it in multiple packets
-    uint32_t len = strlen(msg);
+    int len = strlen(msg);
     for (int i = 0; i < len; i += TX_PLOAD_WIDTH - 1)
     {
         tx_buf[0] = arg || (i + TX_PLOAD_WIDTH - 1 < len ? CONTINUE : END);
@@ -53,7 +53,7 @@ void receive(lv_timer_t *timer)
         uint8_t msg_type = rx_buf[0] >> 6;
         uint8_t user = (rx_buf[0] >> 4) & 0b11;
         uint8_t end = rx_buf[0] & 0b01;
-        uint8_t *msg = rx_buf + 1;
+        char *msg = rx_buf + 1;
         switch (msg_type)
         {
         case PRIVATE:

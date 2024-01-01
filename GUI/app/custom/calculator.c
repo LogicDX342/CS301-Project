@@ -3,17 +3,6 @@
 #include <stdio.h>
 #include "custom.h"
 
-lv_obj_t *cal_com_label_1;
-lv_obj_t *cal_com_label_2;
-lv_obj_t *cal_bi_label_1;
-lv_obj_t *cal_bi_label_2;
-lv_obj_t *cal_eq_label_a;
-lv_obj_t *cal_eq_label_b;
-lv_obj_t *cal_eq_label_c;
-lv_obj_t *cal_eq_label_d;
-lv_obj_t *cal_eq_label_ans;
-lv_obj_t *cal_eq_label_input;
-
 int fl = 0;
 
 int precedence(char op)
@@ -52,7 +41,7 @@ int applyOp(int a, int b, char op)
 
 char *evaluateExpression(char *expression)
 {
-    uint8_t i;
+    int i;
     int values[32], topVal = -1, topOps = -1;
     char ops[32];
     memset(values, 0, sizeof(values));
@@ -155,6 +144,14 @@ char *evaluateExpression(char *expression)
         char op = ops[topOps--];
         values[++topVal] = applyOp(val1, val2, op);
     }
+
+    if (fl || parentheses != 0)
+    {
+        char *error_message = (char *)malloc(strlen("Invalid expression") + 1);
+        strcpy(error_message, "Invalid expression");
+        return error_message;
+    }
+    
     int result = values[topVal];
     char *result_message = (char *)malloc(30);
     sprintf(result_message, "%d", result);
@@ -345,125 +342,125 @@ char *solveEquation(char *a, char *b, char *c, char *d)
 void click_com_1()
 {
     exp_com[eccnt++] = '1';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_2()
 {
     exp_com[eccnt++] = '2';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_3()
 {
     exp_com[eccnt++] = '3';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_4()
 {
     exp_com[eccnt++] = '4';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_5()
 {
     exp_com[eccnt++] = '5';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_6()
 {
     exp_com[eccnt++] = '6';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_7()
 {
     exp_com[eccnt++] = '7';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_8()
 {
     exp_com[eccnt++] = '8';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_9()
 {
     exp_com[eccnt++] = '9';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_0()
 {
     exp_com[eccnt++] = '0';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_add()
 {
     exp_com[eccnt++] = '+';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_sub()
 {
     exp_com[eccnt++] = '-';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_mul()
 {
     exp_com[eccnt++] = '*';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_div()
 {
     exp_com[eccnt++] = '/';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_pow()
 {
     exp_com[eccnt++] = '^';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_left()
 {
     exp_com[eccnt++] = '(';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_right()
 {
     exp_com[eccnt++] = ')';
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_del()
 {
     exp_com[--eccnt] = 0;
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_clean()
 {
     memset(exp_com, 0, sizeof(exp_com));
     eccnt = 0;
-    lv_label_set_text(cal_com_label_1, exp_com);
-    lv_label_set_text(cal_com_label_2, "");
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_2, "");
 }
 void click_com_eql()
 {
     fl = 0;
     char *commenresult = evaluateExpression(exp_com);
-    lv_label_set_text(cal_com_label_2, commenresult);
+    lv_label_set_text(guider_ui.cal_com_label_2, commenresult);
     exp_com[eccnt++] = '=';
-    lv_label_set_text(cal_com_label_1, exp_com);
+    lv_label_set_text(guider_ui.cal_com_label_1, exp_com);
     memset(exp_com, 0, sizeof(exp_com));
     eccnt = 0;
     free(commenresult);
@@ -472,52 +469,52 @@ void click_com_eql()
 void click_bi_1()
 {
     exp_bi[ebcnt++] = '1';
-    lv_label_set_text(cal_bi_label_1, exp_bi);
-    lv_label_set_text(cal_bi_label_2, "");
+    lv_label_set_text(guider_ui.cal_bi_label_1, exp_bi);
+    lv_label_set_text(guider_ui.cal_bi_label_2, "");
 }
 void click_bi_0()
 {
     exp_bi[ebcnt++] = '0';
-    lv_label_set_text(cal_bi_label_1, exp_bi);
-    lv_label_set_text(cal_bi_label_2, "");
+    lv_label_set_text(guider_ui.cal_bi_label_1, exp_bi);
+    lv_label_set_text(guider_ui.cal_bi_label_2, "");
 }
 void click_bi_add()
 {
     exp_bi[ebcnt++] = '+';
-    lv_label_set_text(cal_bi_label_1, exp_bi);
-    lv_label_set_text(cal_bi_label_2, "");
+    lv_label_set_text(guider_ui.cal_bi_label_1, exp_bi);
+    lv_label_set_text(guider_ui.cal_bi_label_2, "");
 }
 void click_bi_sub()
 {
     exp_bi[ebcnt++] = '-';
-    lv_label_set_text(cal_bi_label_1, exp_bi);
-    lv_label_set_text(cal_bi_label_2, "");
+    lv_label_set_text(guider_ui.cal_bi_label_1, exp_bi);
+    lv_label_set_text(guider_ui.cal_bi_label_2, "");
 }
 void click_bi_mul()
 {
     exp_bi[ebcnt++] = '*';
-    lv_label_set_text(cal_bi_label_1, exp_bi);
-    lv_label_set_text(cal_bi_label_2, "");
+    lv_label_set_text(guider_ui.cal_bi_label_1, exp_bi);
+    lv_label_set_text(guider_ui.cal_bi_label_2, "");
 }
 void click_bi_del()
 {
     exp_bi[--ebcnt] = 0;
-    lv_label_set_text(cal_bi_label_1, exp_bi);
-    lv_label_set_text(cal_bi_label_2, "");
+    lv_label_set_text(guider_ui.cal_bi_label_1, exp_bi);
+    lv_label_set_text(guider_ui.cal_bi_label_2, "");
 }
 void click_bi_clean()
 {
     memset(exp_bi, 0, sizeof(exp_bi));
     ebcnt = 0;
-    lv_label_set_text(cal_bi_label_1, exp_bi);
-    lv_label_set_text(cal_bi_label_2, "");
+    lv_label_set_text(guider_ui.cal_bi_label_1, exp_bi);
+    lv_label_set_text(guider_ui.cal_bi_label_2, "");
 }
 void click_bi_eql()
 {
     char *biresult = binaryOperation(exp_bi);
-    lv_label_set_text(cal_bi_label_2, biresult);
+    lv_label_set_text(guider_ui.cal_bi_label_2, biresult);
     exp_bi[ebcnt++] = '=';
-    lv_label_set_text(cal_bi_label_1, exp_bi);
+    lv_label_set_text(guider_ui.cal_bi_label_1, exp_bi);
     memset(exp_bi, 0, sizeof(exp_bi));
     ebcnt = 0;
     free(biresult);
@@ -526,18 +523,18 @@ void click_bi_eql()
 void showabcd()
 {
     if (nowsta == 0)
-        lv_label_set_text(cal_eq_label_input, "now input a");
+        lv_label_set_text(guider_ui.cal_eq_label_input, "now input a");
     else if (nowsta == 1)
-        lv_label_set_text(cal_eq_label_input, "now input b");
+        lv_label_set_text(guider_ui.cal_eq_label_input, "now input b");
     else if (nowsta == 2)
-        lv_label_set_text(cal_eq_label_input, "now input c");
+        lv_label_set_text(guider_ui.cal_eq_label_input, "now input c");
     else if (nowsta == 3)
-        lv_label_set_text(cal_eq_label_input, "now input d");
-    lv_label_set_text(cal_eq_label_a, exp_a);
-    lv_label_set_text(cal_eq_label_b, exp_b);
-    lv_label_set_text(cal_eq_label_c, exp_c);
-    lv_label_set_text(cal_eq_label_d, exp_d);
-    lv_label_set_text(cal_eq_label_ans, "");
+        lv_label_set_text(guider_ui.cal_eq_label_input, "now input d");
+    lv_label_set_text(guider_ui.cal_eq_label_a, exp_a);
+    lv_label_set_text(guider_ui.cal_eq_label_b, exp_b);
+    lv_label_set_text(guider_ui.cal_eq_label_c, exp_c);
+    lv_label_set_text(guider_ui.cal_eq_label_d, exp_d);
+    lv_label_set_text(guider_ui.cal_eq_label_ans, "");
 }
 
 void click_eq_1()
@@ -659,7 +656,7 @@ void click_eq_eql()
 {
     fl = 0;
     char *fresult = solveEquation(exp_a, exp_b, exp_c, exp_d);
-    lv_label_set_text(cal_eq_label_ans, fresult);
+    lv_label_set_text(guider_ui.cal_eq_label_ans, fresult);
     memset(exp_a, 0, sizeof(exp_a));
     memset(exp_b, 0, sizeof(exp_b));
     memset(exp_c, 0, sizeof(exp_d));
@@ -677,14 +674,4 @@ void cal_init()
     memset(exp_b, 0, sizeof(exp_b));
     memset(exp_c, 0, sizeof(exp_c));
     memset(exp_d, 0, sizeof(exp_d));
-    cal_com_label_1 = guider_ui.cal_com_label_1;
-    cal_com_label_2 = guider_ui.cal_com_label_2;
-    cal_bi_label_1 = guider_ui.cal_bi_label_1;
-    cal_bi_label_2 = guider_ui.cal_bi_label_2;
-    cal_eq_label_a = guider_ui.cal_eq_label_a;
-    cal_eq_label_b = guider_ui.cal_eq_label_b;
-    cal_eq_label_c = guider_ui.cal_eq_label_c;
-    cal_eq_label_d = guider_ui.cal_eq_label_d;
-    cal_eq_label_ans = guider_ui.cal_eq_label_ans;
-    cal_eq_label_input = guider_ui.cal_eq_label_input;
 }

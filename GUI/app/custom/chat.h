@@ -23,14 +23,14 @@
 
 
 //Tom's configuration begin
-#define friend_0 Jerry
-#define friend_1 Scott
+#define friend_0 0
+#define friend_1 2
 //Tom's configuration end
 
 
 //////Scott's configuration begin
-//#define friend_0 Jerry
-//#define friend_1 Tom
+//#define friend_0 0
+//#define friend_1 1
 //////Scott's configuration end
 
 

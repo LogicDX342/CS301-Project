@@ -14,7 +14,7 @@
 //All rights reserved									  
 //////////////////////////////////////////////////////////////////////////////////
 
-extern u8 current_user;
+
 
 ////Jerry's configuration begin
 //const u8 TX_ADDRESS0[TX_ADR_WIDTH]={0x35,0x43,0x10,0x10,0x01}; //TO Tom

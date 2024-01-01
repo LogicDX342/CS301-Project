@@ -29,7 +29,7 @@ void send(uint8_t msg_type, uint8_t sender, uint8_t receiver, uint8_t *msg)
         tx_buf[TX_PLOAD_WIDTH-1] = 0;
         if (NRF24L01_TxPacket(tx_buf)==TX_OK)
         	printf(tx_buf);
-        //if (end==CONTINUE)
+        if (end==CONTINUE)
         	HAL_Delay(1000);
     }
 }

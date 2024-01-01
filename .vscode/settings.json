@@ -7,6 +7,7 @@
         "MMC_SD.C": "cpp",
         "lv_calendar_header_dropdown.h": "c",
         "stm32f1xx_hal.h": "c",
-        "custom.h": "c"
+        "custom.h": "c",
+        "time.h": "c"
     }
 }

@@ -545,7 +545,7 @@
 
 #define LV_USE_IMGBTN     0
 
-#define LV_USE_KEYBOARD   1
+#define LV_USE_KEYBOARD   0
 
 #define LV_USE_LED        0
 
@@ -652,7 +652,7 @@
 
 /* JPG + split JPG decoder library.
  * Split JPG is a custom format optimized for embedded systems. */
-#define LV_USE_SJPG 1
+#define LV_USE_SJPG 0
 
 /*GIF decoder library*/
 #define LV_USE_GIF 0

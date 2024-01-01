@@ -23,6 +23,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "remote.h"
+#include "chat.h"
+#include "custom.h"
+#include "24l01.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -42,6 +45,9 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
+uint8_t uBuffer[20];
+extern u8 current_user;
+extern lv_obj_t **usr_scr[10];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -57,6 +63,7 @@
 /* External variables --------------------------------------------------------*/
 extern TIM_HandleTypeDef htim5;
 extern TIM_HandleTypeDef htim6;
+extern UART_HandleTypeDef huart1;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -200,6 +207,20 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles USART1 global interrupt.
+  */
+void USART1_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART1_IRQn 0 */
+
+  /* USER CODE END USART1_IRQn 0 */
+  HAL_UART_IRQHandler(&huart1);
+  /* USER CODE BEGIN USART1_IRQn 1 */
+  HAL_UART_Receive_IT(&huart1, (uint8_t *)uBuffer,1);
+  /* USER CODE END USART1_IRQn 1 */
+}
+
+/**
   * @brief This function handles TIM5 global interrupt.
   */
 void TIM5_IRQHandler(void)
@@ -243,4 +264,47 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
        RemoteICHandler();
     }
 }
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if(huart->Instance==USART1){
+			static unsigned char uRx_Data[128] = {0};
+			static unsigned char uLength = 0;
+			if(uBuffer[0] == '\n'){
+				HAL_UART_Transmit(&huart1, uRx_Data, uLength, 0xffff);
+				uRx_Data[uLength] = 0;
+				if (lv_scr_act() == *usr_scr[0]){
+					lv_obj_t *list = guider_ui.user0_list_1;
+					lv_list_add_text(list, "Me:");
+					lv_obj_t *item = lv_list_add_text(list, uRx_Data);
+					lv_label_set_long_mode(item, LV_LABEL_LONG_WRAP);
+					printf("invoke send usr0\n");
+					send(PRIVATE, current_user, 0, uRx_Data);
+
+				}else if(lv_scr_act() == *usr_scr[1]){
+					lv_obj_t *list = guider_ui.user1_list_1;
+					lv_list_add_text(list, "Me:");
+					lv_obj_t *item = lv_list_add_text(list, uRx_Data);
+					lv_label_set_long_mode(item, LV_LABEL_LONG_WRAP);
+					printf("invoke send usr1\n");
+					send(PRIVATE, current_user, 1, uRx_Data);
+
+				}else if(lv_scr_act() == *usr_scr[3]){
+					lv_obj_t *list = guider_ui.GroupChat_list_1;
+					lv_list_add_text(list, "Me:");
+					lv_obj_t *item = lv_list_add_text(list, uRx_Data);
+					lv_label_set_long_mode(item, LV_LABEL_LONG_WRAP);
+					printf("invoke send group0\n");
+					send(PUBLIC, current_user, 0, uRx_Data);
+					printf("invoke send group1\n");
+					send(PUBLIC, current_user, 1, uRx_Data);
+				}
+				uLength = 0;
+			}else{
+				uRx_Data[uLength] = uBuffer[0];
+				uLength++;
+			}
+		}
+}
+
 /* USER CODE END 1 */

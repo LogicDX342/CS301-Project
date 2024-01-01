@@ -102,7 +102,7 @@ DSTATUS USER_status (
     u8 res = 0;
     switch (pdrv)
     {
-    case SD_CARD:            // SD卡
+    case SD_CARD:            // SD�?
       res = SD_Initialize(); // SD卡初始化
       break;
 
@@ -112,7 +112,7 @@ DSTATUS USER_status (
     if (res)
       return STA_NOINIT;
     else
-      return 0; // 初始化成功
+      return 0; // 初始化成�?
   /* USER CODE END STATUS */
 }
 
@@ -133,21 +133,21 @@ DRESULT USER_read (
 {
   /* USER CODE BEGIN READ */
     u8 res=0; 
-    if (!count)return RES_PARERR;//count不能等于0，否则返回参数错误              
+    if (!count)return RES_PARERR;//count不能等于0，否则返回参数错�?              
     switch(pdrv)
     {
-        case SD_CARD://SD卡
+        case SD_CARD://SD�?
             res=SD_ReadDisk(buff,sector,count);     
-            while(res)//读出错
+            while(res)//读出�?
             {
-                SD_Initialize();    //重新初始化SD卡
+                SD_Initialize();    //重新初始化SD�?
                 res=SD_ReadDisk(buff,sector,count);    
             }
             break;
         default:
             res=1; 
     }
-   //处理返回值，将SPI_SD_driver.c的返回值转成ff.c的返回值
+   //处理返回值，将SPI_SD_driver.c的返回�?�转成ff.c的返回�??
     if(res==0x00)return RES_OK;
 else return RES_ERROR;       
   /* USER CODE END READ */
@@ -172,21 +172,21 @@ DRESULT USER_write (
   /* USER CODE BEGIN WRITE */
   /* USER CODE HERE */
     u8 res=0;  
-    if (!count)return RES_PARERR;//count不能等于0，否则返回参数错误              
+    if (!count)return RES_PARERR;//count不能等于0，否则返回参数错�?              
     switch(pdrv)
     {
-        case SD_CARD://SD卡
+        case SD_CARD://SD�?
             res=SD_WriteDisk((u8*)buff,sector,count);
-            while(res)//写出错
+            while(res)//写出�?
             {
-                SD_Initialize();    //重新初始化SD卡
+                SD_Initialize();    //重新初始化SD�?
                 res=SD_WriteDisk((u8*)buff,sector,count);    
             }
             break;
         default:
             res=1; 
     }
-    //处理返回值，将SPI_SD_driver.c的返回值转成ff.c的返回值
+    //处理返回值，将SPI_SD_driver.c的返回�?�转成ff.c的返回�??
     if(res == 0x00)return RES_OK;
 else return RES_ERROR;    
   /* USER CODE END WRITE */
@@ -209,7 +209,7 @@ DRESULT USER_ioctl (
 {
   /* USER CODE BEGIN IOCTL */
     DRESULT res;                                           
-    if(pdrv==SD_CARD)//SD卡
+    if(pdrv==SD_CARD)//SD�?
     {
         switch(cmd)
         {

@@ -167,7 +167,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
     lv_task_handler();
-    HAL_Delay(30);
+    HAL_Delay(100);
   }
   /* USER CODE END 3 */
 }

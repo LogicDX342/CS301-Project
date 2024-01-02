@@ -10,30 +10,79 @@ char msg_buf[RX_PLOAD_WIDTH * 2 + 1]={0x0};
 uint8_t rx_buf[RX_PLOAD_WIDTH + 1];
 uint8_t tx_buf[TX_PLOAD_WIDTH];
 
+typedef struct
+{
+    uint8_t msg_type;
+    uint8_t sender;
+    uint8_t receiver;
+    char * message;
+} msg_t;
 
+void send_callback(lv_timer_t *timer)
+{
+	printf("timer callback\n");
+    msg_t *msg = (msg_t *)timer->user_data;
+    NRF24L01_TX_Mode(msg->receiver);
+    uint8_t arg = (msg->msg_type << 6) | (msg->sender << 4);
+    int len = strlen(msg->message);
+    static int i = 0;
 
-void send(uint8_t msg_type, uint8_t sender, uint8_t receiver, uint8_t *msg)
+	uint8_t end = (i + TX_PLOAD_WIDTH - 2 < len ? CONTINUE : END);
+	tx_buf[0] = arg | end;
+	char * message = msg->message;
+
+	printf("%x\n",arg);
+	strncpy(tx_buf + 1, message + i, TX_PLOAD_WIDTH - 2);
+	tx_buf[TX_PLOAD_WIDTH-1] = 0;
+	if (NRF24L01_TxPacket(tx_buf)==TX_OK)
+		printf(tx_buf);
+	printf("send: %s\n",message);
+    i += TX_PLOAD_WIDTH - 1;
+    if (i >= len)
+    {
+    	printf("delete timer\n");
+        i = 0;
+        lv_timer_del(timer);
+        free(msg);
+    }
+}
+
+void send(uint8_t msg_type, uint8_t sender, uint8_t receiver, char *message)
 {
 	printf("enter send()\n");
 	NRF24L01_TX_Mode(receiver);
 
-    uint8_t arg = (msg_type << 6) | (sender << 4);
-    // set the first char of the message to the argument
-    // if message is too long, send it in multiple packets
-    uint32_t len = strlen(msg);
+//    uint8_t arg = (msg_type << 6) | (sender << 4);
+//    // set the first char of the message to the argument
+//    // if message is too long, send it in multiple packets
+//    uint32_t len = strlen(msg);
 
-    for (int i = 0; i < len; i += TX_PLOAD_WIDTH - 2)
-    {
-    	uint8_t end = (i + TX_PLOAD_WIDTH - 2 < len ? CONTINUE : END);
-        tx_buf[0] = arg | end;
-        printf("%x\n",arg);
-        strncpy(tx_buf + 1, msg + i, TX_PLOAD_WIDTH - 2);
-        tx_buf[TX_PLOAD_WIDTH-1] = 0;
-        if (NRF24L01_TxPacket(tx_buf)==TX_OK)
-        	printf(tx_buf);
-        if (end==CONTINUE)
-        	HAL_Delay(1000);
-    }
+//    for (int i = 0; i < len; i += TX_PLOAD_WIDTH - 2)
+//    {
+//    	uint8_t end = (i + TX_PLOAD_WIDTH - 2 < len ? CONTINUE : END);
+//        tx_buf[0] = arg | end;
+//        printf("%x\n",arg);
+//        strncpy(tx_buf + 1, msg + i, TX_PLOAD_WIDTH - 2);
+//        tx_buf[TX_PLOAD_WIDTH-1] = 0;
+//        if (NRF24L01_TxPacket(tx_buf)==TX_OK)
+//        	printf(tx_buf);
+//        if (end==CONTINUE)
+//        	HAL_Delay(1000);
+//    }
+
+	msg_t *msg=malloc(sizeof(msg_t));
+//	msg_t msg;
+	msg->msg_type = msg_type;
+	msg->sender = sender;
+	msg->receiver = receiver;
+	msg->message = strdup(message);
+//	if (timer == NULL)
+	{
+		printf("create timer\n");
+		printf("send: %s\n",message);
+		lv_timer_t *timer = lv_timer_create(send_callback, 1000, msg);
+		lv_timer_set_repeat_count(timer, -1);
+	}
 }
 
 void msgbox_event_cb0(lv_event_t *e)
@@ -190,4 +239,5 @@ void receive(lv_timer_t *timer)
             break;
         }
     }
+    printf("exit receive()\n");
 }

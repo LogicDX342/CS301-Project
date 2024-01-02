@@ -6,7 +6,7 @@
 
 lv_obj_t **usr_scr[10] = {&guider_ui.user0,&guider_ui.user1,&guider_ui.chat,&guider_ui.GroupChat,&guider_ui.Homepage,&guider_ui.cal_com,&guider_ui.cal_bi,&guider_ui.cal_eq,&guider_ui.Album};
 
-char msg_buf[RX_PLOAD_WIDTH * 2 + 1]={0x0};
+char msg_buf[RX_PLOAD_WIDTH * 3 + 1]={0x0};
 uint8_t rx_buf[RX_PLOAD_WIDTH + 1];
 uint8_t tx_buf[TX_PLOAD_WIDTH];
 

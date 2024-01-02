@@ -16,10 +16,10 @@
 #define Scott 2
 
 
-//////Jerry's configuration begin
-//#define friend_0 1
-//#define friend_1 2
-//////Jerry's configuration end
+////Jerry's configuration begin
+#define friend_0 1
+#define friend_1 2
+////Jerry's configuration end
 
 
 ////Tom's configuration begin
@@ -28,10 +28,10 @@
 ////Tom's configuration end
 
 
-////Scott's configuration begin
-#define friend_0 0
-#define friend_1 1
-////Scott's configuration end
+//////Scott's configuration begin
+//#define friend_0 0
+//#define friend_1 1
+//////Scott's configuration end
 
 
 #define END 0b00

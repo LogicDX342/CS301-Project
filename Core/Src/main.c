@@ -160,7 +160,6 @@ int main(void)
 				if(user0_online == true){
 					user0_online = false;
 					pop_msgbox("user0 offline");
-
 				}
 
 			}

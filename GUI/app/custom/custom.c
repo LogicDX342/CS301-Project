@@ -42,6 +42,6 @@ void custom_init(lv_ui *ui)
 void start_msg_timer()
 {
     NRF24L01_RX_Mode();
-    lv_timer_t *timer = lv_timer_create(receive, 1000, lv_scr_act());
+    lv_timer_t *timer = lv_timer_create(receive, 500, lv_scr_act());
     lv_timer_set_repeat_count(timer, -1);
 }

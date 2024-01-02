@@ -13195,8 +13195,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "user0"
+			]
 		},
 		{
 			"name": "user1",
@@ -14136,8 +14135,7 @@
 					"bg_img_recolor": "#ffffff",
 					"bg_img_recolor_opa": 0
 				}
-			],
-			"layerName": "user1"
+			]
 		},
 		{
 			"name": "GroupChat",
@@ -15566,15 +15564,15 @@
 						"clicked": [
 							{
 								"trigger": "clicked",
-								"dst": "screen",
+								"dst": "null",
 								"action": {
 									"load_screen": {
-										"ische": true,
+										"ische": false,
 										"duration": 200,
 										"delay": 200,
-										"scrId": "14d07gv0",
+										"scrId": "",
 										"anim_type": "LV_SCR_LOAD_ANIM_NONE",
-										"is_clean": true,
+										"is_clean": false,
 										"is_del": true
 									},
 									"bg_color": {
@@ -15614,9 +15612,9 @@
 										"flag": ""
 									},
 									"customer_code": {
-										"ische": false,
-										"inc_c": "",
-										"code_c": "",
+										"ische": true,
+										"inc_c": "extern u8 user1_online;",
+										"code_c": "if(user1_online){\n  \t\t//Write the load screen code.\n\t    lv_obj_t * act_scr = lv_scr_act();\n\t    lv_disp_t * d = lv_obj_get_disp(act_scr);\n\t    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {\n\t\t\tlv_obj_clean(act_scr);\n\t        if (guider_ui.user1_del == true) {\n\t          setup_scr_user1(&guider_ui);\n\t        }\n\t        lv_scr_load_anim(guider_ui.user1, LV_SCR_LOAD_ANIM_NONE, 200, 200, true);\n\t        guider_ui.chat_del = true;\n\t    }\n}",
 										"inc_py": "",
 										"code_py": ""
 									},
@@ -15864,15 +15862,15 @@
 						"clicked": [
 							{
 								"trigger": "clicked",
-								"dst": "screen",
+								"dst": "null",
 								"action": {
 									"load_screen": {
-										"ische": true,
+										"ische": false,
 										"duration": 200,
 										"delay": 200,
-										"scrId": "oikl98ef",
+										"scrId": "",
 										"anim_type": "LV_SCR_LOAD_ANIM_NONE",
-										"is_clean": true,
+										"is_clean": false,
 										"is_del": true
 									},
 									"bg_color": {
@@ -15912,9 +15910,9 @@
 										"flag": ""
 									},
 									"customer_code": {
-										"ische": false,
-										"inc_c": "",
-										"code_c": "",
+										"ische": true,
+										"inc_c": "#include \"sys.h\"\nextern u8 user0_online;\n",
+										"code_c": "if(user0_online){\n  //Write the load screen code.\n\t    lv_obj_t * act_scr = lv_scr_act();\n\t    lv_disp_t * d = lv_obj_get_disp(act_scr);\n\t    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {\n\t\t\tlv_obj_clean(act_scr);\n\t        if (guider_ui.user0_del == true) {\n\t          setup_scr_user0(&guider_ui);\n\t        }\n\t        lv_scr_load_anim(guider_ui.user0, LV_SCR_LOAD_ANIM_NONE, 200, 200, true);\n\t        guider_ui.chat_del = true;\n\t    }\n}",
 										"inc_py": "",
 										"code_py": ""
 									},
@@ -23941,16 +23939,14 @@
 								{
 									"src": "chat_btn_1",
 									"trigger": "clicked",
-									"dst": "user0",
-									"dst_type": "scr",
+									"dst": "null",
+									"dst_type": "",
 									"src_screen": "chat",
-									"action": "load_screen",
-									"duration": 200,
-									"delay": 200,
-									"scrId": "oikl98ef",
-									"anim_type": "LV_SCR_LOAD_ANIM_NONE",
-									"is_clean": true,
-									"is_del": true
+									"action": "customer_code",
+									"inc_c": "#include \"sys.h\"\nextern u8 user0_online;\n",
+									"code_c": "if(user0_online){\n  //Write the load screen code.\n\t    lv_obj_t * act_scr = lv_scr_act();\n\t    lv_disp_t * d = lv_obj_get_disp(act_scr);\n\t    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {\n\t\t\tlv_obj_clean(act_scr);\n\t        if (guider_ui.user0_del == true) {\n\t          setup_scr_user0(&guider_ui);\n\t        }\n\t        lv_scr_load_anim(guider_ui.user0, LV_SCR_LOAD_ANIM_NONE, 200, 200, true);\n\t        guider_ui.chat_del = true;\n\t    }\n}",
+									"inc_py": "",
+									"code_py": ""
 								}
 							]
 						},
@@ -24128,16 +24124,14 @@
 								{
 									"src": "chat_btn_2",
 									"trigger": "clicked",
-									"dst": "user1",
-									"dst_type": "scr",
+									"dst": "null",
+									"dst_type": "",
 									"src_screen": "chat",
-									"action": "load_screen",
-									"duration": 200,
-									"delay": 200,
-									"scrId": "14d07gv0",
-									"anim_type": "LV_SCR_LOAD_ANIM_NONE",
-									"is_clean": true,
-									"is_del": true
+									"action": "customer_code",
+									"inc_c": "extern u8 user1_online;",
+									"code_c": "if(user1_online){\n  \t\t//Write the load screen code.\n\t    lv_obj_t * act_scr = lv_scr_act();\n\t    lv_disp_t * d = lv_obj_get_disp(act_scr);\n\t    if (d->prev_scr == NULL && (d->scr_to_load == NULL || d->scr_to_load == act_scr)) {\n\t\t\tlv_obj_clean(act_scr);\n\t        if (guider_ui.user1_del == true) {\n\t          setup_scr_user1(&guider_ui);\n\t        }\n\t        lv_scr_load_anim(guider_ui.user1, LV_SCR_LOAD_ANIM_NONE, 200, 200, true);\n\t        guider_ui.chat_del = true;\n\t    }\n}",
+									"inc_py": "",
+									"code_py": ""
 								}
 							]
 						},

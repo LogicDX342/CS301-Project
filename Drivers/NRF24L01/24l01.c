@@ -16,12 +16,12 @@
 
 
 
-////Jerry's configuration begin
-//const u8 TX_ADDRESS0[TX_ADR_WIDTH]={0x35,0x43,0x10,0x10,0x01}; //TO Tom
-//const u8 TX_ADDRESS1[TX_ADR_WIDTH]={0x36,0x43,0x10,0x10,0x01};//TO Scott
-//const u8 RX_ADDRESS0[RX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01};
-//u8 current_user = 0;
-////Jerry's configuration end
+//Jerry's configuration begin
+const u8 TX_ADDRESS0[TX_ADR_WIDTH]={0x35,0x43,0x10,0x10,0x01}; //TO Tom
+const u8 TX_ADDRESS1[TX_ADR_WIDTH]={0x36,0x43,0x10,0x10,0x01};//TO Scott
+const u8 RX_ADDRESS0[RX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01};
+u8 current_user = 0;
+//Jerry's configuration end
 
 
 ////Tom's configuration begin
@@ -32,12 +32,12 @@
 ////Tom's configuration end
 
 
-//Scott's configuration begin
-const u8 TX_ADDRESS0[TX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //TO Jerry
-const u8 TX_ADDRESS1[TX_ADR_WIDTH]={0x35,0x43,0x10,0x10,0x01};//TO Tom
-const u8 RX_ADDRESS0[RX_ADR_WIDTH]={0x36,0x43,0x10,0x10,0x01};
-u8 current_user = 2;
-//Scott's configuration end
+////Scott's configuration begin
+//const u8 TX_ADDRESS0[TX_ADR_WIDTH]={0x34,0x43,0x10,0x10,0x01}; //TO Jerry
+//const u8 TX_ADDRESS1[TX_ADR_WIDTH]={0x35,0x43,0x10,0x10,0x01};//TO Tom
+//const u8 RX_ADDRESS0[RX_ADR_WIDTH]={0x36,0x43,0x10,0x10,0x01};
+//u8 current_user = 2;
+////Scott's configuration end
 
 
 

@@ -38,6 +38,6 @@
 #define CONTINUE 0b01
 void receive(lv_timer_t *timer);
 void send(uint8_t msg_type, uint8_t sender, uint8_t receiver, char *msg);
-
-
+int simple_send(uint8_t msg_type, uint8_t sender, uint8_t receiver, char *msg);
+void pop_msgbox(char *msg);
 #endif

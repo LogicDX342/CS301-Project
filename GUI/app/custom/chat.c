@@ -18,6 +18,17 @@ typedef struct
     char * message;
 } msg_t;
 
+int simple_send(uint8_t msg_type, uint8_t sender, uint8_t receiver, char *msg){
+	NRF24L01_TX_Mode(receiver);
+	tx_buf[0] = (msg_type << 6) | (sender << 4)| END;
+
+	strncpy(tx_buf + 1, msg, TX_PLOAD_WIDTH - 2);
+	tx_buf[TX_PLOAD_WIDTH-1] = 0;
+	if (NRF24L01_TxPacket(tx_buf)==TX_OK)
+		return 1;
+	return 0;
+
+}
 void send_callback(lv_timer_t *timer)
 {
 	printf("timer callback\n");
@@ -124,6 +135,15 @@ void pop_msgbox0(char *msg)
 }
 
 void pop_msgbox1(char *msg)
+{
+    static const char * btns[2] = {"Apply" , ""};
+    lv_obj_t *msgbox = lv_msgbox_create(lv_scr_act(), "Notice", msg, btns, true);
+    lv_obj_set_width(msgbox, 200);
+    lv_obj_align(msgbox, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_add_event_cb(msgbox, msgbox_event_cb1, LV_EVENT_VALUE_CHANGED, NULL);
+}
+
+void pop_msgbox(char *msg)
 {
     static const char * btns[2] = {"Apply" , ""};
     lv_obj_t *msgbox = lv_msgbox_create(lv_scr_act(), "Notice", msg, btns, true);

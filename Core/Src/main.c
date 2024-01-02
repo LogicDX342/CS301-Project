@@ -39,6 +39,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "chat.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -144,23 +145,58 @@ int main(void)
   }
   while (1)
   {
-//	  t++;
-//	  if(t == 2000){
-//		  t = 0;
-//		  if(lv_scr_act() == guider_ui.chat){
-//			  if(user0_online){
-//				  lv_obj_set_style_text_color(guider_ui.chat_btn_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-//			  }else{
-//				  lv_obj_set_style_text_color(guider_ui.chat_btn_1, lv_color_hex(0xff0000), LV_PART_MAIN|LV_STATE_DEFAULT);
-//			  }
-//
-//			  if(user1_online){
-//				  lv_obj_set_style_text_color(guider_ui.chat_btn_2, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
-//			  }else{
-//				  lv_obj_set_style_text_color(guider_ui.chat_btn_2, lv_color_hex(0xff0000), LV_PART_MAIN|LV_STATE_DEFAULT);
-//			  }
-//		  }
-//	  }
+	  t++;
+	  if(t == 30){
+		  t = 0;
+		  strcpy((char *)tmp_buf, "Hello!");
+			if(simple_send(ECHO, current_user, 0, tmp_buf)){
+				if(user0_online == false){
+					user0_online = true;
+					pop_msgbox("user0 online");
+
+				}
+
+			}else{
+				if(user0_online == true){
+					user0_online = false;
+					pop_msgbox("user0 offline");
+
+				}
+
+			}
+
+			if(simple_send(ECHO, current_user, 1, tmp_buf)){
+				if(user1_online == false){
+					user1_online = true;
+					pop_msgbox("user1 online");
+
+				}
+
+			}else{
+				if(user1_online == true){
+
+					user1_online = false;
+					pop_msgbox("user1 offline");
+
+				}
+			}
+
+
+
+		  if(lv_scr_act() == guider_ui.chat){
+			  if(user0_online){
+				  lv_obj_set_style_text_color(guider_ui.chat_btn_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+			  }else{
+				  lv_obj_set_style_text_color(guider_ui.chat_btn_1, lv_color_hex(0xff0000), LV_PART_MAIN|LV_STATE_DEFAULT);
+			  }
+
+			  if(user1_online){
+				  lv_obj_set_style_text_color(guider_ui.chat_btn_2, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+			  }else{
+				  lv_obj_set_style_text_color(guider_ui.chat_btn_2, lv_color_hex(0xff0000), LV_PART_MAIN|LV_STATE_DEFAULT);
+			  }
+		  }
+	  }
 
 
     /* USER CODE END WHILE */
